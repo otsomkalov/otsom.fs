@@ -11,6 +11,10 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
+  version: '$(major).$(minor).$(revision)'
+
 steps:
   - task: UseDotNet@2
     inputs:
@@ -32,4 +36,5 @@ steps:
       command: 'pack'
       configuration: 'Release'
       projects: '**/*.fsproj'
-      versioningScheme: 'byBuildNumber'
+      versionEnvVar: 'version'
+      versioningScheme: 'byEnvVar'
