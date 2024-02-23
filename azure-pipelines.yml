@@ -36,5 +36,10 @@ steps:
       command: 'pack'
       configuration: 'Release'
       packagesToPack: 'src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj'
+      nobuild: true
       versionEnvVar: 'version'
       versioningScheme: 'byEnvVar'
+  - task: PublishPipelineArtifact@1
+    name: Publish
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
