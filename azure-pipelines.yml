@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      version: '8.x'
+  - task: DotNetCoreCLI@2
+    name: Restore
+    inputs:
+      command: 'restore'
+      projects: '**/*.fsproj'
+  - task: DotNetCoreCLI@2
+    name: Build
+    inputs:
+      command: 'build'
+      configuration: 'Release'
+      projects: '**/*.fsproj'
+  - task: DotNetCoreCLI@2
+    name: Pack
+    inputs:
+      command: 'pack'
+      configuration: 'Release'
+      projects: '**/*.fsproj'
+      versioningScheme: 'byBuildNumber'
