@@ -14,6 +14,7 @@ pool:
 variables:
   revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
   version: '$(major).$(minor).$(revision)'
+  BuildConfiguration: 'Release'
 
 steps:
   - task: UseDotNet@2
@@ -28,13 +29,11 @@ steps:
     name: Build
     inputs:
       command: 'build'
-      configuration: 'Release'
       projects: '**/*.fsproj'
   - task: DotNetCoreCLI@2
     name: Pack
     inputs:
       command: 'pack'
-      configuration: 'Release'
       packagesToPack: 'src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj'
       nobuild: true
       versionEnvVar: 'version'
