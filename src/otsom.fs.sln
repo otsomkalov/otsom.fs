@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Extensions", "otsom.fs.Extensions\otsom.fs.Extensions.fsproj", "{030BD6D1-122F-4987-A015-41DA83DEC559}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EA7B6ACD-E807-4955-A155-37EC0FD93852}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Extensions.Tests", "otsom.fs.Extensions.Tests\otsom.fs.Extensions.Tests.fsproj", "{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{030BD6D1-122F-4987-A015-41DA83DEC559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{030BD6D1-122F-4987-A015-41DA83DEC559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{030BD6D1-122F-4987-A015-41DA83DEC559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{030BD6D1-122F-4987-A015-41DA83DEC559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
+	EndGlobalSection
+EndGlobal
