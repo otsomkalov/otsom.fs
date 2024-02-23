@@ -35,6 +35,6 @@ steps:
     inputs:
       command: 'pack'
       configuration: 'Release'
-      projects: '**/*.fsproj'
+      projects: 'src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj'
       versionEnvVar: 'version'
       versioningScheme: 'byEnvVar'
