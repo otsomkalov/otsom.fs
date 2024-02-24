@@ -1,7 +1,7 @@
 namespace otsom.fs.Telegram.Bot
 
 open Microsoft.Extensions.DependencyInjection
-open otsom.fs.Telegram.Bot.Core
+open Core
 open Telegram.Bot
 open otsom.fs.Extensions.DependencyInjection
 

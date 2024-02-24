@@ -1,4 +1,4 @@
-module otsom.fs.Telegram.Bot.Core
+namespace otsom.fs.Telegram.Bot
 
 open Telegram.Bot
 open Telegram.Bot.Types
