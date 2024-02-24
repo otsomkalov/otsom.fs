@@ -17,3 +17,9 @@ module Workflows =
       fun text ->
         bot.SendTextMessageAsync((userId |> UserId.value |> ChatId), text, replyToMessageId = messageId)
         |> Task.map ignore
+
+  let sendUserMessageButtons (bot: ITelegramBotClient) : SendUserMessageButtons =
+    fun userId ->
+      fun text buttons ->
+        bot.SendTextMessageAsync((userId |> UserId.value |> ChatId), text, replyMarkup = buttons)
+        |> Task.map ignore
