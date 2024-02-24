@@ -1,6 +1,7 @@
 namespace otsom.fs.Telegram.Bot
 
 open System.Threading.Tasks
+open Telegram.Bot.Types.ReplyMarkups
 
 module Core =
   type UserId = UserId of int64
@@ -16,3 +17,5 @@ module Core =
   type SendUserMessage = UserId -> SendMessage
   type ReplyToMessage = string -> Task<unit>
   type ReplyToUserMessage = UserId -> int -> ReplyToMessage
+  type SendMessageButtons = string -> InlineKeyboardMarkup -> Task<unit>
+  type SendUserMessageButtons = UserId -> SendMessageButtons

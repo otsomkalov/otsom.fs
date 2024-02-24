@@ -11,3 +11,4 @@ module Startup =
     services
       .BuildSingleton<SendUserMessage, ITelegramBotClient>(Workflows.sendUserMessage)
       .BuildSingleton<ReplyToUserMessage, ITelegramBotClient>(Workflows.replyToUserMessage)
+      .BuildSingleton<SendUserMessageButtons, ITelegramBotClient>(Workflows.sendUserMessageButtons)
