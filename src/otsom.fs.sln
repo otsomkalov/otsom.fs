@@ -6,6 +6,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EA7B6ACD
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Extensions.Tests", "otsom.fs.Extensions.Tests\otsom.fs.Extensions.Tests.fsproj", "{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Telegram.Bot.Core", "otsom.fs.Telegram.Bot.Core\otsom.fs.Telegram.Bot.Core.fsproj", "{C37B7DD5-EAD0-4D6E-A349-186D588348F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37B7DD5-EAD0-4D6E-A349-186D588348F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37B7DD5-EAD0-4D6E-A349-186D588348F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37B7DD5-EAD0-4D6E-A349-186D588348F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37B7DD5-EAD0-4D6E-A349-186D588348F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
