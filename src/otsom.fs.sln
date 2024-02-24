@@ -10,6 +10,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Telegram.Bot", "ot
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Telegram.Bot.Auth.Spotify", "otsom.fs.Telegram.Bot.Auth.Spotify\otsom.fs.Telegram.Bot.Auth.Spotify.fsproj", "{3BC61867-3C2C-4AF5-836D-C1C764907179}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Telegram.Bot.Auth.Spotify.Mongo", "otsom.fs.Telegram.Bot.Auth.Spotify.Mongo\otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.fsproj", "{3FD5345B-A2E2-4669-93C7-83D61110A7EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities", "otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities\otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities.csproj", "{BD090A7B-610F-4D8A-B0B9-C219FC442153}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{3BC61867-3C2C-4AF5-836D-C1C764907179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BC61867-3C2C-4AF5-836D-C1C764907179}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC61867-3C2C-4AF5-836D-C1C764907179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD5345B-A2E2-4669-93C7-83D61110A7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD5345B-A2E2-4669-93C7-83D61110A7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD5345B-A2E2-4669-93C7-83D61110A7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD5345B-A2E2-4669-93C7-83D61110A7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
