@@ -5,6 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>0.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RootNamespace>otsom.fs.Telegram.Bot.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
