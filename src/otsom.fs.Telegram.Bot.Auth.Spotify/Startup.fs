@@ -9,7 +9,7 @@ open otsom.fs.Telegram.Bot.Auth.Spotify.Workflows
 
 [<RequireQualifiedAccess>]
 module Startup =
-  let addSpotifyAuth (configuration: IConfiguration) (services: IServiceCollection) =
+  let addTelegramBotSpotifyAuthCore (configuration: IConfiguration) (services: IServiceCollection) =
     services
       .Configure<SpotifySettings>(configuration.GetSection(SpotifySettings.SectionName))
 
