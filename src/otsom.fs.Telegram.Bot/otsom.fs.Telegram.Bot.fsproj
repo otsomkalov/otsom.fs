@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="otsom.fs.Extensions" Version="0.0.8"/>
+    <PackageReference Include="otsom.fs.Extensions" Version="0.0.12"/>
     <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.1"/>
     <PackageReference Include="Telegram.Bot" Version="19.0.0"/>
   </ItemGroup>
