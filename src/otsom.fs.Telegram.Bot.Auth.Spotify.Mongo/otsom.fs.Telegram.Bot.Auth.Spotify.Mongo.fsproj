@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify" Version="0.0.5"/>
-    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities" Version="0.0.2"/>
+    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify" Version="0.0.9"/>
+    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities" Version="0.0.8"/>
   </ItemGroup>
 
 </Project>
