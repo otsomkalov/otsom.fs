@@ -20,3 +20,12 @@ let inline bind ([<InlineIfLambda>] binder: 'a -> Task<'b>) (task': Task<'a>) : 
 let inline ignore (task': Task<'a>) : Task<unit> =
   task'
   |> map ignore
+
+let inline tap (action: 'a -> unit) (task': Task<'a>) =
+  task {
+    let! v = task'
+
+    action v
+
+    return v
+  }
