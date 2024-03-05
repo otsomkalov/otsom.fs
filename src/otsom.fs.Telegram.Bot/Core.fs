@@ -10,12 +10,28 @@ module Core =
   module UserId =
     let value (UserId id) = id
 
+  type BotMessageId = BotMessageId of int
+
+  [<RequireQualifiedAccess>]
+  module BotMessageId =
+    let value (BotMessageId id) = id
+
   type MessageButton = string * string
   type KeyboardButton = string
 
   type SendMessage = string -> Task<unit>
   type SendUserMessage = UserId -> SendMessage
-  type ReplyToMessage = string -> Task<unit>
+  type ReplyToMessage = string -> Task<BotMessageId>
   type ReplyToUserMessage = UserId -> int -> ReplyToMessage
   type SendMessageButtons = string -> InlineKeyboardMarkup -> Task<unit>
   type SendUserMessageButtons = UserId -> SendMessageButtons
+  type SendKeyboard = string -> ReplyKeyboardMarkup -> Task<unit>
+  type SendUserKeyboard = UserId -> SendKeyboard
+  type ReplyWithKeyboard = string -> ReplyKeyboardMarkup -> Task<unit>
+  type ReplyUserWithKeyboard = UserId -> int -> ReplyWithKeyboard
+  type AskForReply = string -> Task<unit>
+  type AskUserForReply = UserId -> int -> AskForReply
+  type EditMessage = string -> Task<unit>
+  type EditBotMessage = UserId -> BotMessageId -> EditMessage
+  type EditMessageButtons = string -> InlineKeyboardMarkup -> Task<unit>
+  type EditBotMessageButtons = UserId -> BotMessageId -> EditMessageButtons
