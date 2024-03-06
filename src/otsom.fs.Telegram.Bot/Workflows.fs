@@ -10,7 +10,7 @@ open otsom.fs.Extensions
 
 module Workflows =
   let private escapeMarkdownString (str: string) =
-    Regex.Replace(str, "([\(\)`\.#\-!+])", "\$1")
+    Regex.Replace(str, "([\(\)`\.#\-!+=&\?])", "\$1")
 
   let sendUserMessage (bot: ITelegramBotClient) : SendUserMessage =
     fun userId ->
