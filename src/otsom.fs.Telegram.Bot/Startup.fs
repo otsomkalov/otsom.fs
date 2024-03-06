@@ -12,3 +12,8 @@ module Startup =
       .BuildSingleton<SendUserMessage, ITelegramBotClient>(Workflows.sendUserMessage)
       .BuildSingleton<ReplyToUserMessage, ITelegramBotClient>(Workflows.replyToUserMessage)
       .BuildSingleton<SendUserMessageButtons, ITelegramBotClient>(Workflows.sendUserMessageButtons)
+      .BuildSingleton<SendUserKeyboard, ITelegramBotClient>(Workflows.sendUserKeyboard)
+      .BuildSingleton<ReplyUserWithKeyboard, ITelegramBotClient>(Workflows.replyUserWithKeyboard)
+      .BuildSingleton<AskUserForReply, ITelegramBotClient>(Workflows.askUserForReply)
+      .BuildSingleton<EditBotMessage, ITelegramBotClient>(Workflows.editUserMessage)
+      .BuildSingleton<EditBotMessageButtons, ITelegramBotClient>(Workflows.editUserMessageButtons)
