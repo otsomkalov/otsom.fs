@@ -25,3 +25,22 @@ let inline either
   match input with
   | Ok x -> onOk x
   | Error err -> onError err
+
+let inline tap ([<InlineIfLambda>] action: 'okInput -> unit) (input: Result<'okInput, 'errorInput>) : Result<'okInput, 'errorInput> =
+  match input with
+  | Ok x ->
+    action x
+    Ok x
+  | Error err -> Error err
+
+let inline taskTap
+  ([<InlineIfLambda>] action: 'okInput -> Task<unit>)
+  (input: Result<'okInput, 'errorInput>)
+  : Task<Result<'okInput, 'errorInput>> =
+  task {
+    match input with
+    | Ok x ->
+      do! action x
+      return Ok x
+    | Error err -> return Error err
+  }

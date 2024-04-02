@@ -22,8 +22,8 @@ let mapError mapping taskResult =
 let either onOk onError taskResult =
   taskResult |> Task.map (Result.either onOk onError)
 
-let inline taskEither
-  ([<InlineIfLambda>] onOk: 'okInput -> Task<'output>)
-  ([<InlineIfLambda>] onError: 'errorInput -> Task<'output>)
-  =
+let inline taskEither ([<InlineIfLambda>] onOk: 'okInput -> Task<'output>) ([<InlineIfLambda>] onError: 'errorInput -> Task<'output>) =
   Task.bind (Result.either onOk onError)
+
+let inline taskTap ([<InlineIfLambda>] effect: 'ok -> Task<unit>) (taskResult: Task<Result<'ok, 'err>>) : Task<Result<'ok, 'err>> =
+  taskResult |> Task.bind (Result.taskTap effect)
