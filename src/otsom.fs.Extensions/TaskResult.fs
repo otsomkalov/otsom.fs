@@ -7,8 +7,8 @@ let ok v = Ok v |> Task.FromResult
 
 let error e = Error e |> Task.FromResult
 
-let bind binder taskResult =
-  taskResult |> Task.map (Result.bind binder)
+let inline bind ([<InlineIfLambda>] binder: 'a -> Task<Result<'b, 'e>>) (taskResult: Task<Result<'a, 'e>>) : Task<Result<'b, 'e>> =
+  taskResult |> Task.bind (Result.taskBind binder)
 
 let map mapping taskResult =
   taskResult |> Task.map (Result.map mapping)
