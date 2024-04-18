@@ -14,6 +14,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Telegram.Bot.Auth.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities", "otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities\otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities.csproj", "{BD090A7B-610F-4D8A-B0B9-C219FC442153}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Extensions.DependencyInjection", "otsom.fs.Extensions.DependencyInjection\otsom.fs.Extensions.DependencyInjection.fsproj", "{D2D3DF60-D647-456A-8AFE-93AE0E4424C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD090A7B-610F-4D8A-B0B9-C219FC442153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2D3DF60-D647-456A-8AFE-93AE0E4424C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2D3DF60-D647-456A-8AFE-93AE0E4424C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2D3DF60-D647-456A-8AFE-93AE0E4424C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2D3DF60-D647-456A-8AFE-93AE0E4424C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
