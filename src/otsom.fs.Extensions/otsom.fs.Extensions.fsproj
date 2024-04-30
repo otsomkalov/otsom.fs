@@ -12,6 +12,7 @@
     <Compile Include="Result.fs" />
     <Compile Include="TaskResult.fs" />
     <Compile Include="Option.fs" />
+    <Compile Include="TaskOption.fs" />
     <Compile Include="Async.fs" />
   </ItemGroup>
 
