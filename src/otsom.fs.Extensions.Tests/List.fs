@@ -27,3 +27,13 @@ let ``takeSafe returns correct list if count lower than length`` () =
   let result = list |> List.takeSafe 1
 
   result |> should equal [ 1 ]
+
+[<Fact>]
+let ``prepend prepends list2 to list1`` () =
+  let list1 = [ 1; 2 ]
+  let list2 = [ 3; 4 ]
+
+  let result = List.prepend list1 list2
+
+  result
+  |> should equal [ 3; 4; 1; 2 ]
