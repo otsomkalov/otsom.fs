@@ -2,14 +2,9 @@ namespace otsom.fs.Telegram.Bot
 
 open System.Threading.Tasks
 open Telegram.Bot.Types.ReplyMarkups
+open otsom.fs.Core
 
 module Core =
-  type UserId = UserId of int64
-
-  [<RequireQualifiedAccess>]
-  module UserId =
-    let value (UserId id) = id
-
   type BotMessageId = BotMessageId of int
 
   [<RequireQualifiedAccess>]

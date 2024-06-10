@@ -6,6 +6,7 @@ open Telegram.Bot.Types
 open Core
 open Telegram.Bot.Types.Enums
 open Telegram.Bot.Types.ReplyMarkups
+open otsom.fs.Core
 open otsom.fs.Extensions
 
 module Workflows =
