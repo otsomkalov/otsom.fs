@@ -29,3 +29,12 @@ let inline tap (action: 'a -> unit) (task': Task<'a>) =
 
     return v
   }
+
+let inline taskTap (action: 'a -> Task<unit>) (task': Task<'a>) =
+  task {
+    let! v = task'
+
+    do! action v
+
+    return v
+  }

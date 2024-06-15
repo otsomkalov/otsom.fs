@@ -6,3 +6,5 @@ let takeSafe count list =
     list
   else
     list |> List.take count
+
+let prepend list1 list2 = list2 @ list1

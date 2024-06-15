@@ -1,7 +1,7 @@
 namespace otsom.fs.Telegram.Bot.Auth.Spotify
 
 open System.Threading.Tasks
-open otsom.fs.Telegram.Bot.Core
+open otsom.fs.Core
 
 [<RequireQualifiedAccess>]
 module Auth =
