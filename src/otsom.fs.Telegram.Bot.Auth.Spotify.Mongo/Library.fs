@@ -2,11 +2,11 @@ namespace otsom.fs.Telegram.Bot.Auth.Spotify.Mongo
 
 open Microsoft.FSharp.Core
 open MongoDB.Driver
+open otsom.fs.Core
 open otsom.fs.Extensions
 open otsom.fs.Telegram.Bot.Auth.Spotify.Workflows
 open otsom.fs.Telegram.Bot.Auth.Spotify.Mongo
 open otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Mappings
-open otsom.fs.Telegram.Bot.Core
 
 module internal Workflows =
   [<RequireQualifiedAccess>]

@@ -1,8 +1,8 @@
 namespace otsom.fs.Telegram.Bot.Auth.Spotify.Mongo
 
+open otsom.fs.Core
 open otsom.fs.Telegram.Bot.Auth.Spotify.Mongo
 open otsom.fs.Telegram.Bot.Auth.Spotify.Workflows
-open otsom.fs.Telegram.Bot.Core
 
 module internal Mappings =
   [<RequireQualifiedAccess>]
