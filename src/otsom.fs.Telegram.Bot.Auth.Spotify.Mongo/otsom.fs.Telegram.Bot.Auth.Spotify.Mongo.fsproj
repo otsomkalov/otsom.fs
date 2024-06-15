@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify" Version="0.0.18"/>
+    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify" Version="0.0.22"/>
     <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities" Version="0.0.8"/>
   </ItemGroup>
 
