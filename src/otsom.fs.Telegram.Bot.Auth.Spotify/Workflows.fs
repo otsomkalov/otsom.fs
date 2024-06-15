@@ -4,8 +4,8 @@ open System.Collections.Generic
 open System.Threading.Tasks
 open Microsoft.Extensions.Options
 open SpotifyAPI.Web
+open otsom.fs.Core
 open otsom.fs.Telegram.Bot.Auth.Spotify.Settings
-open otsom.fs.Telegram.Bot.Core
 open otsom.fs.Extensions
 open shortid
 
