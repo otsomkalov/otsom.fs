@@ -6,14 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Mappings.fs"/>
-    <Compile Include="Library.fs"/>
-    <Compile Include="Startup.fs"/>
+    <Compile Include="Mappings.fs" />
+    <Compile Include="Library.fs" />
+    <Compile Include="Startup.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify" Version="0.0.22"/>
-    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities" Version="0.0.16"/>
+    <PackageReference Include="otsom.fs.Extensions" Version="0.0.34" />
+    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify" Version="0.0.22" />
+    <PackageReference Include="otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.Entities" Version="0.0.16" />
   </ItemGroup>
 
 </Project>
