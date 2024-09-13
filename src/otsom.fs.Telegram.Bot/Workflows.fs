@@ -17,7 +17,7 @@ module Workflows =
     fun userId ->
       fun text ->
         bot.SendTextMessageAsync((userId |> UserId.value |> ChatId), text |> escapeMarkdownString, parseMode = ParseMode.MarkdownV2)
-        |> Task.ignore
+        |> Task.map (_.MessageId >> BotMessageId)
 
   let replyToUserMessage (bot: ITelegramBotClient) : ReplyToUserMessage =
     fun userId messageId ->
@@ -79,7 +79,12 @@ module Workflows =
   let editUserMessage (bot: ITelegramBotClient) : EditBotMessage =
     fun userId messageId ->
       fun text ->
-        bot.EditMessageTextAsync((userId |> UserId.value |> ChatId), (messageId |> BotMessageId.value), text |> escapeMarkdownString, ParseMode.MarkdownV2)
+        bot.EditMessageTextAsync(
+          (userId |> UserId.value |> ChatId),
+          (messageId |> BotMessageId.value),
+          text |> escapeMarkdownString,
+          ParseMode.MarkdownV2
+        )
         |> Task.ignore
 
   let editUserMessageButtons (bot: ITelegramBotClient) : EditBotMessageButtons =

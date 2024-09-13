@@ -14,7 +14,7 @@ module Core =
   type MessageButton = string * string
   type KeyboardButton = string
 
-  type SendMessage = string -> Task<unit>
+  type SendMessage = string -> Task<BotMessageId>
   type SendUserMessage = UserId -> SendMessage
   type ReplyToMessage = string -> Task<BotMessageId>
   type ReplyToUserMessage = UserId -> int -> ReplyToMessage
