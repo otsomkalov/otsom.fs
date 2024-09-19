@@ -1,5 +1,6 @@
 namespace otsom.fs.Telegram.Bot
 
+open System
 open System.Text.RegularExpressions
 open Telegram.Bot
 open Telegram.Bot.Types
@@ -71,7 +72,7 @@ module Workflows =
           (userId |> UserId.value |> ChatId),
           text |> escapeMarkdownString,
           parseMode = ParseMode.MarkdownV2,
-          replyToMessageId = messageId,
+          replyToMessageId = (messageId |> Option.map Nullable |> Option.defaultValue (Nullable<int>())),
           replyMarkup = ForceReplyMarkup()
         )
         |> Task.ignore
