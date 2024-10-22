@@ -12,6 +12,7 @@
     <Compile Include="List.fs"/>
     <Compile Include="String.fs" />
     <Compile Include="Option.fs" />
+    <Compile Include="Operators.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

@@ -1,11 +1,20 @@
 ﻿[<AutoOpen>]
 module otsom.fs.Extensions.Operators
 
-let (!>) = Task.map
-let (!!>) = Task.bind
-let (=>) = Result.map
-let (==>) = Result.bind
-let (!=>) = TaskResult.map
+/// Task.map
+let (&|>) arg func = Task.map func arg
 
-let (!=!>) arg f =
-  arg |> (f >> Result.taskMap >> Task.bind)
+/// Task.bind
+let (&|&>) arg func = Task.bind func arg
+
+/// Result.map
+let (=|>) arg func = Result.map func arg
+
+/// Result.taskMap
+let (=|&>) arg func = Result.taskMap func arg
+
+/// TaskResult.map
+let (&=|>) arg func = TaskResult.map func arg
+
+/// TaskResult.taskMap
+let (&=|&>) arg func = TaskResult.taskMap func arg
