@@ -13,6 +13,9 @@ let (&|&>) arg func = Task.bind func arg
 /// Result.map
 let (=|>) arg func = Result.map func arg
 
+/// Result.bind
+let (=|=>) arg func = Result.bind func arg
+
 /// Result.taskMap
 let (=|&>) arg func = Result.taskMap func arg
 

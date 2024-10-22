@@ -44,6 +44,12 @@ let ``(=|>) works`` () =
 
 
 [<Fact>]
+let ``(=|=>) works`` () =
+  let result = result' =|=> (fun x -> Ok(x + 5))
+
+  result |> should equal (Result<int, unit>.Ok 10)
+
+[<Fact>]
 let ``(=|&>) works`` () =
   task {
     let! result = result' =|&> (fun x -> (x + 5) |> Task.FromResult)
