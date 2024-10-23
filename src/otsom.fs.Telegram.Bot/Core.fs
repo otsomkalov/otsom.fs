@@ -30,3 +30,20 @@ module Core =
   type EditBotMessage = UserId -> BotMessageId -> EditMessage
   type EditMessageButtons = string -> InlineKeyboardMarkup -> Task<unit>
   type EditBotMessageButtons = UserId -> BotMessageId -> EditMessageButtons
+
+  type ChatId = string
+
+  type ConversationId = string
+
+  type ConversationStepId = string
+
+  type ConversationStep = { Id: ConversationStepId; Resource: string }
+
+  type Conversation = {Id: ConversationId; Steps: ConversationStep list }
+
+  type CurrentConversation = { Id: ConversationId; CurrentStep: ConversationStep }
+
+  type Chat = {
+    Id: ChatId
+    CurrentConversation: CurrentConversation option
+  }

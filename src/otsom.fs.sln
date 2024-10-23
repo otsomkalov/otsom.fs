@@ -20,6 +20,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Core", "otsom.fs.C
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Bot", "otsom.fs.Bot\otsom.fs.Bot.fsproj", "{4794CF5C-1A01-494E-A105-7BB5D82D1CE5}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Bot.Conversation", "otsom.fs.Bot.Conversation\otsom.fs.Bot.Conversation.fsproj", "{8FEE0D29-1845-49D1-943C-732DC80D076B}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Bot.Conversation.Tests", "otsom.fs.Bot.Conversation.Tests\otsom.fs.Bot.Conversation.Tests.fsproj", "{D029E0EF-D0D3-4CB6-8607-7DF0776DAF26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,8 +66,17 @@ Global
 		{4794CF5C-1A01-494E-A105-7BB5D82D1CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4794CF5C-1A01-494E-A105-7BB5D82D1CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4794CF5C-1A01-494E-A105-7BB5D82D1CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEE0D29-1845-49D1-943C-732DC80D076B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEE0D29-1845-49D1-943C-732DC80D076B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEE0D29-1845-49D1-943C-732DC80D076B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEE0D29-1845-49D1-943C-732DC80D076B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D029E0EF-D0D3-4CB6-8607-7DF0776DAF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D029E0EF-D0D3-4CB6-8607-7DF0776DAF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D029E0EF-D0D3-4CB6-8607-7DF0776DAF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D029E0EF-D0D3-4CB6-8607-7DF0776DAF26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
+		{D029E0EF-D0D3-4CB6-8607-7DF0776DAF26} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
 	EndGlobalSection
 EndGlobal

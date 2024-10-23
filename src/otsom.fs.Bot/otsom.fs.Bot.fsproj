@@ -7,11 +7,11 @@
 
     <ItemGroup>
         <PackageReference Include="otsom.fs.Core" Version="0.0.2"/>
-        <PackageReference Include="otsom.fs.Extensions" Version="0.0.32"/>
+        <PackageReference Include="otsom.fs.Extensions" Version="0.0.39"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="Library.fs"/>
+        <Compile Include="Core.fs" />
     </ItemGroup>
 
 </Project>
