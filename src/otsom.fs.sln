@@ -18,6 +18,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Extensions.Depende
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Core", "otsom.fs.Core\otsom.fs.Core.fsproj", "{E3AE8846-99BC-405D-869B-B06F87C97AB9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{E5A9EACA-C79B-487C-8B13-25B13169B7CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,5 +61,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
+		{030BD6D1-122F-4987-A015-41DA83DEC559} = {E5A9EACA-C79B-487C-8B13-25B13169B7CE}
 	EndGlobalSection
 EndGlobal
