@@ -19,3 +19,9 @@ let inline tap (effect: 'a -> unit) (option: 'a option) : 'a option =
     do effect v
     option
   | None -> option
+
+let inline someIf (predicate: 'a -> bool) (value: 'a) =
+  if predicate value then Some value else None
+
+let inline noneIf (predicate: 'a -> bool) (value: 'a) =
+  if predicate value then None else Some value
