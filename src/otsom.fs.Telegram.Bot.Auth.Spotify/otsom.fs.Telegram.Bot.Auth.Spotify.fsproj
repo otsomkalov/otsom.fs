@@ -19,7 +19,7 @@
     <PackageReference Include="shortid" Version="4.0.0" />
     <PackageReference Include="otsom.fs.Telegram.Bot" Version="0.0.25" />
     <PackageReference Include="otsom.fs.Core" Version="0.0.2" />
-    <PackageReference Include="SpotifyAPI.Web" Version="7.1.1" />
+    <PackageReference Include="SpotifyAPI.Web" Version="7.2.1" />
   </ItemGroup>
 
 </Project>
