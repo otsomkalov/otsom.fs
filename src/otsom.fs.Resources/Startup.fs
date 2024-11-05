@@ -13,5 +13,5 @@ let addResources (cfg: IConfiguration) (services: IServiceCollection) =
   services
     .BuildSingleton<ResourcesSettings, IOptions<ResourcesSettings>>(_.Value)
 
-    .BuildSingleton<LoadDefaultResources, ResourcesSettings, ResourceRepo.LoadLangResources>(Workflows.loadDefaultResources)
-    .BuildSingleton<LoadResources, ResourcesSettings, ResourceRepo.LoadLangResources>(Workflows.loadResources)
+    .BuildSingleton<LoadDefaultResources, _, _>(Workflows.loadDefaultResources)
+    .BuildSingleton<LoadResources, _, _>(Workflows.loadResources)
