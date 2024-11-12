@@ -1,0 +1,51 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/otsom.fs.Resources.Mongo/*
+
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/otsom.fs.Resources.Mongo/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
+  version: '$(major).$(minor).$(revision)'
+  BuildConfiguration: 'Release'
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      version: '8.x'
+  - task: DotNetCoreCLI@2
+    name: Restore
+    inputs:
+      command: 'restore'
+      projects: 'src/otsom.fs.Resources.Mongo/*.fsproj'
+  - task: DotNetCoreCLI@2
+    name: Build
+    inputs:
+      command: 'build'
+      projects: 'src/otsom.fs.Resources.Mongo/*.fsproj'
+      arguments: '-c $(BuildConfiguration)'
+  - task: DotNetCoreCLI@2
+    name: Pack
+    inputs:
+      command: 'pack'
+      packagesToPack: 'src/otsom.fs.Resources.Mongo/otsom.fs.Resources.Mongo.fsproj'
+      nobuild: true
+      versionEnvVar: 'version'
+      versioningScheme: 'byEnvVar'
+  - task: PublishPipelineArtifact@1
+    name: Publish
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
