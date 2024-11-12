@@ -1,5 +1,7 @@
 module otsom.fs.Resources.Mongo.Startup
 
+#nowarn "20"
+
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open MongoDB.Bson.Serialization
