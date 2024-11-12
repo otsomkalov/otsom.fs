@@ -44,7 +44,12 @@ let loadResources (settings: ResourcesSettings) (loadResources: ResourceRepo.Loa
         resourcesMap
         |> Map.tryFind key
         |> Option.map (fun r -> String.Format(r, args))
-        |> Option.defaultValue (defaultResourcesMap |> Map.tryFind key |> Option.defaultValue key)
+        |> Option.defaultValue (
+          defaultResourcesMap
+          |> Map.tryFind key
+          |> Option.map (fun r -> String.Format(r, args))
+          |> Option.defaultValue key
+        )
 
     return getResource, formatResource
   }

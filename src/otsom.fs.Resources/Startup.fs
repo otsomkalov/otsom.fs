@@ -1,9 +1,10 @@
 ﻿module otsom.fs.Resources.Startup
 
+#nowarn "20"
+
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Options
-open otsom.fs.Resources.Repos
 open otsom.fs.Resources.Settings
 open otsom.fs.Extensions.DependencyInjection
 
