@@ -3,8 +3,7 @@
 open System.Threading.Tasks
 
 type Resource =
-  { Id: string
-    Key: string
+  { Key: string
     Value: string
     Lang: string }
 
