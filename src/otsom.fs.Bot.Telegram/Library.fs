@@ -1,13 +1,13 @@
 namespace otsom.fs.Bot.Telegram
 
-open System.Threading.Tasks
-open Telegram.Bot
-open Telegram.Bot.Types.Enums
-open Telegram.Bot.Types.ReplyMarkups
-open otsom.fs.Extensions
 open otsom.fs.Bot
+open Telegram.Bot
+open Telegram.Bot.Types
+
 
 module internal Workflows =
-  let sendChatMessage (bot: ITelegramBotClient) : SendChatMessage =
-    fun chatId text ->
-      ()
+
+  let deleteBotMessage (bot: ITelegramBotClient) : DeleteBotMessage =
+    fun chatId messageId ->
+
+      bot.DeleteMessageAsync((chatId.Value |> ChatId), messageId.Value)
