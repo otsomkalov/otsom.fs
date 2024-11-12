@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", 
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Resources", "otsom.fs.Resources\otsom.fs.Resources.fsproj", "{9404AF53-45DA-4D4D-A1FC-ED73378920FB}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Resources.Mongo", "otsom.fs.Resources.Mongo\otsom.fs.Resources.Mongo.fsproj", "{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{9404AF53-45DA-4D4D-A1FC-ED73378920FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9404AF53-45DA-4D4D-A1FC-ED73378920FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9404AF53-45DA-4D4D-A1FC-ED73378920FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
