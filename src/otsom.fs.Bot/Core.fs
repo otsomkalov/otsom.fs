@@ -14,3 +14,11 @@ type ChatId =
   member this.Value = let (ChatId id) = this in id
 
 type DeleteBotMessage = ChatId -> BotMessageId -> Task
+
+type ISendMessage =
+  abstract SendMessage: string -> Task<BotMessageId>
+
+type IChatContext =
+  inherit ISendMessage
+
+type BuildChatContext = ChatId -> IChatContext
