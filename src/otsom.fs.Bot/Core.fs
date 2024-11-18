@@ -3,12 +3,22 @@ namespace otsom.fs.Bot
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
 
-type BotMessageId = BotMessageId of int
+type BotMessageId =
+  | BotMessageId of int
+
+  member this.Value = let (BotMessageId id) = this in id
 
 type ChatId =
-  | UserId of int64
-  | GroupId of int64
-  | ChannelId of int64
+  | ChatId of int64
 
-type SendMessage = string -> Task<BotMessageId>
-type SendChatMessage = ChatId -> SendMessage
+  member this.Value = let (ChatId id) = this in id
+
+type DeleteBotMessage = ChatId -> BotMessageId -> Task
+
+type ISendMessage =
+  abstract SendMessage: string -> Task<BotMessageId>
+
+type IChatContext =
+  inherit ISendMessage
+
+type BuildChatContext = ChatId -> IChatContext
