@@ -29,3 +29,18 @@ module internal Workflows =
     fun chatId messageId text ->
       bot.EditMessageTextAsync((chatId.Value |> ChatId), messageId.Value, text |> escapeMarkdownString)
       &|> ignore
+
+  let private getInlineMarkup (buttons: MessageButtons) =
+    buttons
+    |> Seq.map (Seq.map InlineKeyboardButton.WithCallbackData)
+    |> InlineKeyboardMarkup
+
+  let editBotMessageButtons (bot: ITelegramBotClient) : EditBotMessageButtons =
+    fun chatId messageId text buttons ->
+      bot.EditMessageTextAsync(
+        (chatId.Value |> ChatId),
+        messageId.Value,
+        text |> escapeMarkdownString,
+        replyMarkup = getInlineMarkup buttons
+      )
+      &|> ignore
