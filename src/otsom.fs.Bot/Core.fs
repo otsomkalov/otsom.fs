@@ -43,9 +43,18 @@ type MessageButton = string * string
 type MessageButtons = MessageButton seq seq
 type SendMessageButtons = string -> MessageButtons -> Task<BotMessageId>
 type SendChatMessageButtons = ChatId -> SendMessageButtons
-type ISendMessageButtons = abstract SendMessageButtons: SendMessageButtons
+
+type ISendMessageButtons =
+  abstract SendMessageButtons: SendMessageButtons
+
 type EditMessageButtons = string -> MessageButtons -> Task<unit>
 type EditBotMessageButtons = ChatId -> BotMessageId -> EditMessageButtons
+
+type AskForReply = string -> Task<unit>
+type AskChatForReply = ChatId -> AskForReply
+
+type IAskForReply =
+  abstract AskForReply: AskForReply
 
 type IEditMessageButtons =
   abstract EditMessageButtons: EditMessageButtons
@@ -63,5 +72,6 @@ type IChatContext =
   inherit ISendKeyboard
   inherit IBuildBotMessageContext
   inherit ISendMessageButtons
+  inherit IAskForReply
 
 type BuildChatContext = ChatId -> IChatContext
