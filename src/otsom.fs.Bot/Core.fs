@@ -22,7 +22,11 @@ type SendChatMessage = ChatId -> SendMessage
 type ISendMessage =
   abstract SendMessage: SendMessage
 
+type IDeleteBotMessage =
+  abstract DeleteBotMessage: DeleteBotMessage
+
 type IChatContext =
   inherit ISendMessage
+  inherit IDeleteBotMessage
 
 type BuildChatContext = ChatId -> IChatContext

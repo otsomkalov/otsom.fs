@@ -28,6 +28,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Resources", "otsom
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Resources.Mongo", "otsom.fs.Resources.Mongo\otsom.fs.Resources.Mongo.fsproj", "{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "otsom.fs.Bot.Telegram", "otsom.fs.Bot.Telegram\otsom.fs.Bot.Telegram.fsproj", "{C9DF0B8E-6758-478F-BC61-EEF661EEA62F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,10 +80,15 @@ Global
 		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F8FCA0-31F3-4AFA-9B07-0087F5518E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9DF0B8E-6758-478F-BC61-EEF661EEA62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DF0B8E-6758-478F-BC61-EEF661EEA62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DF0B8E-6758-478F-BC61-EEF661EEA62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DF0B8E-6758-478F-BC61-EEF661EEA62F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CFB3EA93-DF3B-4C0C-993D-0B3C4365DFE1} = {EA7B6ACD-E807-4955-A155-37EC0FD93852}
 		{DD8A7F6B-8ED3-44DC-9FD7-6876039962A2} = {6EBBC193-54D2-43E0-8868-949F6F166A3E}
 		{030BD6D1-122F-4987-A015-41DA83DEC559} = {E5A9EACA-C79B-487C-8B13-25B13169B7CE}
+		{C9DF0B8E-6758-478F-BC61-EEF661EEA62F} = {6EBBC193-54D2-43E0-8868-949F6F166A3E}
 	EndGlobalSection
 EndGlobal
