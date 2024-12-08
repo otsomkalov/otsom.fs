@@ -16,7 +16,6 @@ type ChatId =
 type DeleteBotMessage = ChatId -> BotMessageId -> Task
 
 type SendMessage = string -> Task<BotMessageId>
-
 type SendChatMessage = ChatId -> SendMessage
 
 type ISendMessage =
@@ -25,8 +24,16 @@ type ISendMessage =
 type IDeleteBotMessage =
   abstract DeleteBotMessage: DeleteBotMessage
 
+type KeyboardButton = string
+
+type Keyboard = KeyboardButton seq seq
+type SendKeyboard = string -> Keyboard -> Task<BotMessageId>
+type SendChatKeyboard = ChatId -> SendKeyboard
+type ISendKeyboard = abstract SendKeyboard: SendKeyboard
+
 type IChatContext =
   inherit ISendMessage
   inherit IDeleteBotMessage
+  inherit ISendKeyboard
 
 type BuildChatContext = ChatId -> IChatContext
