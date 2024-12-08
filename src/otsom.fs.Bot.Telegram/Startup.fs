@@ -14,12 +14,17 @@ let internal buildChatContext (bot: ITelegramBotClient) : BuildChatContext =
     { new IChatContext with
         member this.SendMessage = sendChatMessage bot chatId
         member this.DeleteBotMessage = deleteBotMessage bot
-        member this.SendKeyboard = sendChatKeyboard bot chatId }
+        member this.SendKeyboard = sendChatKeyboard bot chatId
+
+        member this.BuildBotMessageContext botMessageId =
+          { new IBotMessageContext with
+              member this.EditMessage = editBotMessage bot chatId botMessageId } }
 
 let addTelegramBot (cfg: IConfiguration) (services: IServiceCollection) =
   services
     .BuildSingleton<DeleteBotMessage, ITelegramBotClient>(deleteBotMessage)
     .BuildSingleton<SendChatMessage, ITelegramBotClient>(sendChatMessage)
     .BuildSingleton<SendChatKeyboard, ITelegramBotClient>(sendChatKeyboard)
+    .BuildSingleton<EditBotMessage, ITelegramBotClient>(editBotMessage)
 
   services.BuildSingleton<BuildChatContext, ITelegramBotClient>(buildChatContext)
