@@ -1,5 +1,7 @@
 module otsom.fs.Bot.Telegram.Startup
 
+#nowarn "20"
+
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Telegram.Bot
@@ -11,11 +13,13 @@ let internal buildChatContext (bot: ITelegramBotClient) : BuildChatContext =
   fun chatId ->
     { new IChatContext with
         member this.SendMessage = sendChatMessage bot chatId
-        member this.DeleteBotMessage = deleteBotMessage bot }
+        member this.DeleteBotMessage = deleteBotMessage bot
+        member this.SendKeyboard = sendChatKeyboard bot chatId }
 
 let addTelegramBot (cfg: IConfiguration) (services: IServiceCollection) =
   services
     .BuildSingleton<DeleteBotMessage, ITelegramBotClient>(deleteBotMessage)
     .BuildSingleton<SendChatMessage, ITelegramBotClient>(sendChatMessage)
+    .BuildSingleton<SendChatKeyboard, ITelegramBotClient>(sendChatKeyboard)
 
   services.BuildSingleton<BuildChatContext, ITelegramBotClient>(buildChatContext)
