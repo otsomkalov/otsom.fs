@@ -29,11 +29,26 @@ type KeyboardButton = string
 type Keyboard = KeyboardButton seq seq
 type SendKeyboard = string -> Keyboard -> Task<BotMessageId>
 type SendChatKeyboard = ChatId -> SendKeyboard
-type ISendKeyboard = abstract SendKeyboard: SendKeyboard
+
+type ISendKeyboard =
+  abstract SendKeyboard: SendKeyboard
+
+type EditMessage = string -> Task<unit>
+type EditBotMessage = ChatId -> BotMessageId -> EditMessage
+
+type IEditMessage =
+  abstract EditMessage: EditMessage
+
+type IBotMessageContext =
+  inherit IEditMessage
+
+type IBuildBotMessageContext =
+  abstract BuildBotMessageContext: BotMessageId -> IBotMessageContext
 
 type IChatContext =
   inherit ISendMessage
   inherit IDeleteBotMessage
   inherit ISendKeyboard
+  inherit IBuildBotMessageContext
 
 type BuildChatContext = ChatId -> IChatContext
