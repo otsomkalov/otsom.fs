@@ -24,3 +24,8 @@ module internal Workflows =
 
   let deleteBotMessage (bot: ITelegramBotClient) : DeleteBotMessage =
     fun chatId messageId -> bot.DeleteMessageAsync((chatId.Value |> ChatId), messageId.Value)
+
+  let editBotMessage (bot: ITelegramBotClient) : EditBotMessage =
+    fun chatId messageId text ->
+      bot.EditMessageTextAsync((chatId.Value |> ChatId), messageId.Value, text |> escapeMarkdownString)
+      &|> ignore
