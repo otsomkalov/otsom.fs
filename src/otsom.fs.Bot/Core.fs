@@ -39,8 +39,17 @@ type EditBotMessage = ChatId -> BotMessageId -> EditMessage
 type IEditMessage =
   abstract EditMessage: EditMessage
 
+type MessageButton = string * string
+type MessageButtons = MessageButton seq seq
+type EditMessageButtons = string -> MessageButtons -> Task<unit>
+type EditBotMessageButtons = ChatId -> BotMessageId -> EditMessageButtons
+
+type IEditMessageButtons =
+  abstract EditMessageButtons: EditMessageButtons
+
 type IBotMessageContext =
   inherit IEditMessage
+  inherit IEditMessageButtons
 
 type IBuildBotMessageContext =
   abstract BuildBotMessageContext: BotMessageId -> IBotMessageContext
