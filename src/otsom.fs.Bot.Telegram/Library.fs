@@ -61,3 +61,13 @@ module internal Workflows =
         parseMode = ParseMode.MarkdownV2
       )
       &|> ignore
+
+  let askForReply (bot: ITelegramBotClient) (chatId: otsom.fs.Bot.ChatId) : AskForReply =
+    fun text ->
+      bot.SendTextMessageAsync(
+        (chatId.Value |> ChatId),
+        text |> escapeMarkdownString,
+        parseMode = ParseMode.MarkdownV2,
+        replyMarkup = ForceReplyMarkup()
+      )
+      &|> ignore
