@@ -12,7 +12,7 @@
     <PackageReference Include="otsom.fs.Extensions" Version="0.0.43"/>
     <PackageReference Include="Telegram.Bot" Version="19.0.0"/>
     <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.1"/>
-    <PackageReference Include="otsom.fs.Bot" Version="0.0.21"/>
+    <PackageReference Include="otsom.fs.Bot" Version="0.0.23"/>
   </ItemGroup>
 
   <ItemGroup>

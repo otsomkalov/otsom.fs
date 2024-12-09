@@ -9,24 +9,31 @@ open otsom.fs.Bot
 open otsom.fs.Extensions.DependencyInjection
 open otsom.fs.Bot.Telegram.Workflows
 
-let internal buildChatContext (bot: ITelegramBotClient) : BuildChatContext =
+let internal buildBotMessageContext bot chatId =
+  fun botMessageId ->
+    { new IBotMessageContext with
+        member this.EditMessage = editBotMessage bot chatId botMessageId
+        member this.EditMessageButtons = editBotMessageButtons bot chatId botMessageId }
+
+let internal buildChatContext bot : BuildChatContext =
   fun chatId ->
     { new IChatContext with
         member this.SendMessage = sendChatMessage bot chatId
         member this.DeleteBotMessage = deleteBotMessage bot
         member this.SendKeyboard = sendChatKeyboard bot chatId
         member this.SendMessageButtons = sendChatMessageButtons bot chatId
+        member this.AskForReply = askForReply bot chatId
 
         member this.BuildBotMessageContext botMessageId =
-          { new IBotMessageContext with
-              member this.EditMessage = editBotMessage bot chatId botMessageId
-              member this.EditMessageButtons = editBotMessageButtons bot chatId botMessageId } }
+          buildBotMessageContext bot chatId botMessageId }
 
 let addTelegramBot (cfg: IConfiguration) (services: IServiceCollection) =
   services
     .BuildSingleton<SendChatMessage, ITelegramBotClient>(sendChatMessage)
     .BuildSingleton<SendChatKeyboard, ITelegramBotClient>(sendChatKeyboard)
     .BuildSingleton<SendChatMessageButtons, ITelegramBotClient>(sendChatMessageButtons)
+
+    .BuildSingleton<AskChatForReply, ITelegramBotClient>(askForReply)
 
     .BuildSingleton<EditBotMessage, ITelegramBotClient>(editBotMessage)
     .BuildSingleton<EditBotMessageButtons, ITelegramBotClient>(editBotMessageButtons)
