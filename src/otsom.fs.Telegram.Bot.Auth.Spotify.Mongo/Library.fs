@@ -2,7 +2,6 @@ namespace otsom.fs.Telegram.Bot.Auth.Spotify.Mongo
 
 open Microsoft.FSharp.Core
 open MongoDB.Driver
-open otsom.fs.Core
 open otsom.fs.Extensions
 open otsom.fs.Telegram.Bot.Auth.Spotify.Workflows
 open otsom.fs.Telegram.Bot.Auth.Spotify.Mongo
@@ -21,8 +20,7 @@ module internal Workflows =
     let load (db: IMongoDatabase) : Inited.Load =
       fun state ->
         let collection = db.GetCollection "auth"
-        let state = state |> State.value
-        let authFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.State), state)
+        let authFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.State), state.Value)
 
         collection.Find(authFilter).SingleOrDefaultAsync()
         |> Task.map (Option.ofObj >> Option.map Inited.fromDb)
@@ -31,21 +29,18 @@ module internal Workflows =
   module Fulfilled =
     let save (db: IMongoDatabase) : Fulfilled.Save =
       fun auth ->
-        let collection = db.GetCollection "auth"
-        let state = auth.State |> State.value
-        let userId = auth.UserId |> UserId.value
+        let collection = db.GetCollection<Entities.Auth> "auth"
         let dbAuth = auth |> Fulfilled.toDb
-        let stateFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.State), state)
-        let userIdFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.UserId), userId)
+        let stateFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.State), auth.State.Value)
+        let userIdFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.AccountId), auth.AccountId.Value)
         let filter = Builders<Entities.Auth>.Filter.And(stateFilter, userIdFilter)
 
         collection.ReplaceOneAsync(filter, dbAuth) |> Task.map ignore
 
     let load (db: IMongoDatabase) : Fulfilled.Load =
       fun state ->
-        let collection = db.GetCollection "auth"
-        let state = state |> State.value
-        let stateFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.State), state)
+        let collection = db.GetCollection<Entities.Auth> "auth"
+        let stateFilter = Builders<Entities.Auth>.Filter.Eq((fun a -> a.State), state.Value)
 
         collection.Find(stateFilter).SingleOrDefaultAsync()
         |> Task.map (Option.ofObj >> Option.map Fulfilled.fromDb)
@@ -55,18 +50,16 @@ module internal Workflows =
     let save (db: IMongoDatabase) : Completed.Save =
       fun auth ->
         let collection = db.GetCollection "tokens"
-        let userId = auth.UserId |> UserId.value
-        let filter = Builders<Entities.UserToken>.Filter.Eq((fun t -> t.UserId), userId)
+        let filter = Builders<Entities.UserToken>.Filter.Eq((fun t -> t.AccountId), auth.AccountId.Value)
         let dbAuth = auth |> Completed.toDb
 
         collection.ReplaceOneAsync(filter, dbAuth, ReplaceOptions(IsUpsert = true))
         |> Task.map ignore
 
     let load (db: IMongoDatabase) : Completed.Load =
-      fun userId ->
+      fun accountId ->
         let collection = db.GetCollection "tokens"
-        let userId = userId |> UserId.value
-        let filter = Builders<Entities.UserToken>.Filter.Eq((fun a -> a.UserId), userId)
+        let filter = Builders<Entities.UserToken>.Filter.Eq((fun a -> a.AccountId), accountId.Value)
 
         collection.Find(filter).SingleOrDefaultAsync()
         |> Task.map (Option.ofObj >> Option.map Completed.fromDb)
