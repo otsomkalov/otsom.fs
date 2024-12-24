@@ -31,9 +31,9 @@ module Workflows =
   let init (saveInitedAuth: Inited.Save) (options: IOptions<SpotifySettings>) : Auth.Init =
     let settings = options.Value
 
-    fun userId scopes ->
+    fun accountId scopes ->
       let initedAuth =
-        { AccountId = userId
+        { AccountId = accountId
           State = State.create () }
 
       task {
@@ -113,17 +113,17 @@ module Workflows =
       do! saveCompletedAuth completed
     }
 
-    let validateAuth userId =
+    let validateAuth accountId =
       fun (auth: Fulfilled) ->
-        if userId = auth.AccountId then
+        if accountId = auth.AccountId then
           Ok(auth)
         else
           Error(Auth.StateDoesntBelongToUser)
 
-    fun userId state ->
+    fun accountId state ->
       state
       |> State.parse
       |> loadFulfilledAuth
       |> Task.map (Result.ofOption Auth.CompleteError.StateNotFound)
-      |> Task.map (Result.bind (validateAuth userId))
+      |> Task.map (Result.bind (validateAuth accountId))
       |> Task.bind (Result.taskMap createCompletedAuth)
