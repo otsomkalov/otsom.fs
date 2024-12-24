@@ -16,9 +16,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageReference Include="otsom.fs.Extensions" Version="0.0.34" />
+    <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.1"/>
     <PackageReference Include="shortid" Version="4.0.0" />
-    <PackageReference Include="otsom.fs.Telegram.Bot" Version="0.0.25" />
-    <PackageReference Include="otsom.fs.Core" Version="0.0.2" />
     <PackageReference Include="SpotifyAPI.Web" Version="7.1.1" />
   </ItemGroup>
 

@@ -4,13 +4,16 @@ open System.Collections.Generic
 open System.Threading.Tasks
 open Microsoft.Extensions.Options
 open SpotifyAPI.Web
-open otsom.fs.Core
 open otsom.fs.Telegram.Bot.Auth.Spotify.Settings
 open otsom.fs.Extensions
 open shortid
 
 module Workflows =
-  type State = private State of string
+  type State =
+    private
+    | State of string
+
+    member this.Value = let (State state) = this in state
 
   [<RequireQualifiedAccess>]
   module State =
@@ -18,9 +21,7 @@ module Workflows =
 
     let parse str = State str
 
-    let value (State key) = key
-
-  type Inited = { UserId: UserId; State: State }
+  type Inited = { AccountId: AccountId; State: State }
 
   [<RequireQualifiedAccess>]
   module Inited =
@@ -30,9 +31,9 @@ module Workflows =
   let init (saveInitedAuth: Inited.Save) (options: IOptions<SpotifySettings>) : Auth.Init =
     let settings = options.Value
 
-    fun userId scopes ->
+    fun accountId scopes ->
       let initedAuth =
-        { UserId = userId
+        { AccountId = accountId
           State = State.create () }
 
       task {
@@ -44,7 +45,7 @@ module Workflows =
             settings.ClientId,
             LoginRequest.ResponseType.Code,
             Scope = (scopes |> List<string>),
-            State = (initedAuth.State |> State.value)
+            State = initedAuth.State.Value
           )
 
         return loginRequest.ToUri().ToString()
@@ -57,7 +58,7 @@ module Workflows =
     let value (Code code) = code
 
   type Fulfilled =
-    { UserId: UserId
+    { AccountId: AccountId
       State: State
       Code: Code }
 
@@ -70,27 +71,26 @@ module Workflows =
     let addCodeToAuth code =
       fun (initedAuth: Inited option) ->
         match initedAuth with
-        | Some auth ->
-          task {
+        | Some auth -> task {
             let fulfilledAuth: Fulfilled =
               { State = auth.State
-                UserId = auth.UserId
+                AccountId = auth.AccountId
                 Code = Code code }
 
             do! saveFulfilledAuth fulfilledAuth
 
-            return (auth.State |> State.value |> Ok)
+            return (auth.State.Value |> Ok)
           }
         | None -> Auth.FulfillmentError.StateNotFound |> Error |> Task.FromResult
 
     fun state code -> state |> State.parse |> loadInitedAuth |> Task.bind (addCodeToAuth code)
 
-  type Completed = { UserId: UserId; Token: string }
+  type Completed = { AccountId: AccountId; Token: string }
 
   [<RequireQualifiedAccess>]
   module Completed =
     type Save = Completed -> Task<unit>
-    type Load = UserId -> Task<Completed option>
+    type Load = AccountId -> Task<Completed option>
 
   let complete
     (loadFulfilledAuth: Fulfilled.Load)
@@ -99,30 +99,31 @@ module Workflows =
     : Auth.Complete =
     let settings = options.Value
 
-    let createCompletedAuth (auth: Fulfilled) =
-      task {
-        let! token =
-          (settings.ClientId, settings.ClientSecret, (auth.Code |> Code.value), settings.CallbackUrl)
-          |> AuthorizationCodeTokenRequest
-          |> OAuthClient().RequestToken
-          |> Task.map _.RefreshToken
+    let createCompletedAuth (auth: Fulfilled) = task {
+      let! token =
+        (settings.ClientId, settings.ClientSecret, (auth.Code |> Code.value), settings.CallbackUrl)
+        |> AuthorizationCodeTokenRequest
+        |> OAuthClient().RequestToken
+        |> Task.map _.RefreshToken
 
-        let completed = { UserId = auth.UserId; Token = token }
+      let completed =
+        { AccountId = auth.AccountId
+          Token = token }
 
-        do! saveCompletedAuth completed
-      }
+      do! saveCompletedAuth completed
+    }
 
-    let validateAuth userId =
+    let validateAuth accountId =
       fun (auth: Fulfilled) ->
-        if userId = auth.UserId then
+        if accountId = auth.AccountId then
           Ok(auth)
         else
           Error(Auth.StateDoesntBelongToUser)
 
-    fun userId state ->
+    fun accountId state ->
       state
       |> State.parse
       |> loadFulfilledAuth
       |> Task.map (Result.ofOption Auth.CompleteError.StateNotFound)
-      |> Task.map (Result.bind (validateAuth userId))
+      |> Task.map (Result.bind (validateAuth accountId))
       |> Task.bind (Result.taskMap createCompletedAuth)
