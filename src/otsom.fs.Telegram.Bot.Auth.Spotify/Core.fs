@@ -1,11 +1,15 @@
 namespace otsom.fs.Telegram.Bot.Auth.Spotify
 
 open System.Threading.Tasks
-open otsom.fs.Core
+
+type AccountId =
+  | AccountId of string
+
+  member this.Value = let (AccountId value) = this in value
 
 [<RequireQualifiedAccess>]
 module Auth =
-  type Init = UserId -> string list -> Task<string>
+  type Init = AccountId -> string list -> Task<string>
 
   type FulfillmentError = | StateNotFound
 
@@ -15,4 +19,4 @@ module Auth =
     | StateNotFound
     | StateDoesntBelongToUser
 
-  type Complete = UserId -> string -> Task<Result<unit, CompleteError>>
+  type Complete = AccountId -> string -> Task<Result<unit, CompleteError>>
