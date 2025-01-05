@@ -15,6 +15,11 @@ let internal buildBotMessageContext bot chatId =
         member this.EditMessage = editBotMessage bot chatId botMessageId
         member this.EditMessageButtons = editBotMessageButtons bot chatId botMessageId }
 
+let internal buildChatMessageContext bot chatId : BuildChatMessageContext =
+  fun chatMessageId ->
+    { new IChatMessageContext with
+        member this.ReplyToMessage = replyToChatMessage bot chatId chatMessageId }
+
 let internal buildChatContext bot : BuildChatContext =
   fun chatId ->
     { new IChatContext with
@@ -25,7 +30,9 @@ let internal buildChatContext bot : BuildChatContext =
         member this.AskForReply = askForReply bot chatId
 
         member this.BuildBotMessageContext botMessageId =
-          buildBotMessageContext bot chatId botMessageId }
+          buildBotMessageContext bot chatId botMessageId
+
+        member this.BuildChatMessageContext = buildChatMessageContext bot chatId }
 
 let addTelegramBot (cfg: IConfiguration) (services: IServiceCollection) =
   services
