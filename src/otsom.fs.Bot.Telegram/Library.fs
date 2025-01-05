@@ -71,3 +71,13 @@ module internal Workflows =
         replyMarkup = ForceReplyMarkup()
       )
       &|> ignore
+
+  let replyToChatMessage (bot: ITelegramBotClient) (chatId: otsom.fs.Bot.ChatId) (messageId: ChatMessageId) : ReplyToMessage =
+    fun text ->
+      bot.SendTextMessageAsync(
+        (chatId.Value |> ChatId),
+        text |> escapeMarkdownString,
+        parseMode = ParseMode.MarkdownV2,
+        replyToMessageId = messageId.Value
+      )
+      &|> (_.MessageId >> BotMessageId)
