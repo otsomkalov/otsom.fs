@@ -8,10 +8,10 @@ type BotMessageId =
 
   member this.Value = let (BotMessageId id) = this in id
 
-type UserMessageId =
-  | UserMessageId of int
+type ChatMessageId =
+  | ChatMessageId of int
 
-  member this.Value = let (UserMessageId id) = this in id
+  member this.Value = let (ChatMessageId id) = this in id
 
 type ChatId =
   | ChatId of int64
@@ -72,17 +72,18 @@ type IBuildBotMessageContext =
   abstract BuildBotMessageContext: BotMessageId -> IBotMessageContext
 
 type ReplyToMessage = string -> Task<BotMessageId>
+type ReplyToChatMessage = ChatId -> ChatMessageId -> ReplyToMessage
 
 type IReplyToMessage =
   abstract ReplyToMessage: ReplyToMessage
 
-type IUserMessageContext =
+type IChatMessageContext =
   inherit IReplyToMessage
 
-type BuildUserMessageContext = UserMessageId -> IUserMessageContext
+type BuildChatMessageContext = ChatMessageId -> IChatMessageContext
 
-type IBuildUserMessageContext =
-  abstract BuildUserMessageContext: BuildUserMessageContext
+type IBuildChatMessageContext =
+  abstract BuildChatMessageContext: BuildChatMessageContext
 
 type IChatContext =
   inherit ISendMessage
@@ -94,7 +95,7 @@ type IChatContext =
   inherit IAskForReply
 
   inherit IBuildBotMessageContext
-  inherit IBuildUserMessageContext
+  inherit IBuildChatMessageContext
 
 type BuildChatContext = ChatId -> IChatContext
 
