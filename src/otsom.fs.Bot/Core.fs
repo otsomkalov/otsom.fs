@@ -8,6 +8,11 @@ type BotMessageId =
 
   member this.Value = let (BotMessageId id) = this in id
 
+type UserMessageId =
+  | UserMessageId of int
+
+  member this.Value = let (UserMessageId id) = this in id
+
 type ChatId =
   | ChatId of int64
 
@@ -53,8 +58,6 @@ type EditBotMessageButtons = ChatId -> BotMessageId -> EditMessageButtons
 type AskForReply = string -> Task<unit>
 type AskChatForReply = ChatId -> AskForReply
 
-type SendNotification = string -> Task<unit>
-
 type IAskForReply =
   abstract AskForReply: AskForReply
 
@@ -68,16 +71,18 @@ type IBotMessageContext =
 type IBuildBotMessageContext =
   abstract BuildBotMessageContext: BotMessageId -> IBotMessageContext
 
-type ISendNotification =
-  abstract SendNotification: SendNotification
+type ReplyToMessage = string -> Task<BotMessageId>
 
-type IButtonClickContext =
-  inherit ISendNotification
+type IReplyToMessage =
+  abstract ReplyToMessage: ReplyToMessage
 
-type ButtonClickId =
-  | ButtonClickId of string
+type IUserMessageContext =
+  inherit IReplyToMessage
 
-  member this.Value = let (ButtonClickId id) = this in id
+type BuildUserMessageContext = UserMessageId -> IUserMessageContext
+
+type IBuildUserMessageContext =
+  abstract BuildUserMessageContext: BuildUserMessageContext
 
 type IChatContext =
   inherit ISendMessage
@@ -89,6 +94,21 @@ type IChatContext =
   inherit IAskForReply
 
   inherit IBuildBotMessageContext
+  inherit IBuildUserMessageContext
 
 type BuildChatContext = ChatId -> IChatContext
+
+type SendNotification = string -> Task<unit>
+
+type ISendNotification =
+  abstract SendNotification: SendNotification
+
+type IButtonClickContext =
+  inherit ISendNotification
+
+type ButtonClickId =
+  | ButtonClickId of string
+
+  member this.Value = let (ButtonClickId id) = this in id
+
 type BuildButtonClickContext = ButtonClickId -> IButtonClickContext
