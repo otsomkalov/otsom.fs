@@ -31,7 +31,7 @@ module Workflows =
   let init (saveInitedAuth: Inited.Save) (options: IOptions<SpotifySettings>) : Auth.Init =
     let settings = options.Value
 
-    fun accountId scopes ->
+    fun accountId ->
       let initedAuth =
         { AccountId = accountId
           State = State.create () }
@@ -44,7 +44,7 @@ module Workflows =
             settings.CallbackUrl,
             settings.ClientId,
             LoginRequest.ResponseType.Code,
-            Scope = (scopes |> List<string>),
+            Scope = (settings.Scopes |> List<string>),
             State = initedAuth.State.Value
           )
 

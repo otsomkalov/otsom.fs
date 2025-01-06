@@ -7,6 +7,7 @@ module Settings =
   type SpotifySettings =
     { ClientId: string
       ClientSecret: string
-      CallbackUrl: Uri }
+      CallbackUrl: Uri
+      Scopes: string array }
 
     static member SectionName = "Spotify"

@@ -9,7 +9,7 @@ type AccountId =
 
 [<RequireQualifiedAccess>]
 module Auth =
-  type Init = AccountId -> string list -> Task<string>
+  type Init = AccountId -> Task<string>
 
   type FulfillmentError = | StateNotFound
 
