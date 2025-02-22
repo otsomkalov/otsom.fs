@@ -12,4 +12,4 @@ module Helpers =
   let (|Message|_|) (update: Update) =
     update
     |> Option.someIf (fun u -> u.Type = UpdateType.Message)
-    |> Option.map (_.Message)
+    |> Option.map _.Message
