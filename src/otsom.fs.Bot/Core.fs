@@ -19,106 +19,59 @@ type ChatId =
 
   member this.Value = let (ChatId id) = this in id
 
-type DeleteBotMessage = ChatId -> BotMessageId -> Task
-
-type SendMessage = string -> Task<BotMessageId>
-type SendChatMessage = ChatId -> SendMessage
-
 type ISendMessage =
-  abstract SendMessage: SendMessage
+  abstract SendMessage: ChatId * string -> Task<BotMessageId>
 
 type IDeleteBotMessage =
-  abstract DeleteBotMessage: DeleteBotMessage
+  abstract DeleteBotMessage: ChatId * BotMessageId -> Task
 
 type KeyboardButton = string
 
 type Keyboard = KeyboardButton seq seq
-type SendKeyboard = string -> Keyboard -> Task<BotMessageId>
-type SendChatKeyboard = ChatId -> SendKeyboard
 
 type ISendKeyboard =
-  abstract SendKeyboard: SendKeyboard
-
-type EditMessage = string -> Task<unit>
-type EditBotMessage = ChatId -> BotMessageId -> EditMessage
+  abstract SendKeyboard: ChatId * string * Keyboard -> Task<BotMessageId>
 
 type IEditMessage =
-  abstract EditMessage: EditMessage
+  abstract EditMessage: ChatId * BotMessageId * string -> Task<unit>
 
 type MessageButton = string * string
 type MessageButtons = MessageButton seq seq
-type SendMessageButtons = string -> MessageButtons -> Task<BotMessageId>
-type SendChatMessageButtons = ChatId -> SendMessageButtons
 
 type ISendMessageButtons =
-  abstract SendMessageButtons: SendMessageButtons
-
-type EditMessageButtons = string -> MessageButtons -> Task<unit>
-type EditBotMessageButtons = ChatId -> BotMessageId -> EditMessageButtons
-
-type AskForReply = string -> Task<unit>
-type AskChatForReply = ChatId -> AskForReply
+  abstract SendMessageButtons: ChatId * string * MessageButtons -> Task<BotMessageId>
 
 type IAskForReply =
-  abstract AskForReply: AskForReply
+  abstract AskForReply: ChatId * string -> Task<unit>
 
 type IEditMessageButtons =
-  abstract EditMessageButtons: EditMessageButtons
-
-type IBotMessageContext =
-  inherit IEditMessage
-  inherit IEditMessageButtons
-
-type IBuildBotMessageContext =
-  abstract BuildBotMessageContext: BotMessageId -> IBotMessageContext
-
-type ReplyToMessage = string -> Task<BotMessageId>
-type ReplyToChatMessage = ChatId -> ChatMessageId -> ReplyToMessage
+  abstract EditMessageButtons: ChatId * BotMessageId * string * MessageButtons -> Task<unit>
 
 type IReplyToMessage =
-  abstract ReplyToMessage: ReplyToMessage
-
-type IChatMessageContext =
-  inherit IReplyToMessage
-
-type BuildChatMessageContext = ChatMessageId -> IChatMessageContext
-
-type IBuildChatMessageContext =
-  abstract BuildChatMessageContext: BuildChatMessageContext
-
-type SendLink = string -> string -> Uri -> Task<BotMessageId>
-type SendChatLink = ChatId -> SendLink
+  abstract ReplyToMessage: ChatId * ChatMessageId * string -> Task<BotMessageId>
 
 type ISendLink =
-  abstract SendLink: SendLink
-
-type IChatContext =
-  inherit ISendMessage
-  inherit ISendKeyboard
-  inherit ISendMessageButtons
-
-  inherit IDeleteBotMessage
-
-  inherit IAskForReply
-
-  inherit IBuildBotMessageContext
-  inherit IBuildChatMessageContext
-
-  inherit ISendLink
-
-type BuildChatContext = ChatId -> IChatContext
-
-type SendNotification = string -> Task<unit>
-
-type ISendNotification =
-  abstract SendNotification: SendNotification
-
-type IButtonClickContext =
-  inherit ISendNotification
+  abstract SendLink: ChatId * string * string * Uri -> Task<BotMessageId>
 
 type ButtonClickId =
   | ButtonClickId of string
 
   member this.Value = let (ButtonClickId id) = this in id
 
-type BuildButtonClickContext = ButtonClickId -> IButtonClickContext
+type ISendNotification =
+  abstract SendNotification: ChatId * ButtonClickId * string -> Task<unit>
+
+type IBotService =
+  inherit ISendMessage
+  inherit ISendKeyboard
+  inherit ISendMessageButtons
+  inherit ISendLink
+
+  inherit IReplyToMessage
+
+  inherit IEditMessage
+  inherit IEditMessageButtons
+
+  inherit IDeleteBotMessage
+
+  inherit IAskForReply
