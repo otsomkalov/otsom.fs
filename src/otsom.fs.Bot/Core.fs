@@ -2,6 +2,7 @@ namespace otsom.fs.Bot
 
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
+open System
 
 type BotMessageId =
   | BotMessageId of int
@@ -85,6 +86,12 @@ type BuildChatMessageContext = ChatMessageId -> IChatMessageContext
 type IBuildChatMessageContext =
   abstract BuildChatMessageContext: BuildChatMessageContext
 
+type SendLink = string -> string -> Uri -> Task<BotMessageId>
+type SendChatLink = ChatId -> SendLink
+
+type ISendLink =
+  abstract SendLink: SendLink
+
 type IChatContext =
   inherit ISendMessage
   inherit ISendKeyboard
@@ -96,6 +103,8 @@ type IChatContext =
 
   inherit IBuildBotMessageContext
   inherit IBuildChatMessageContext
+
+  inherit ISendLink
 
 type BuildChatContext = ChatId -> IChatContext
 
