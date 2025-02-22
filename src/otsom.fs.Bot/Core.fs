@@ -75,3 +75,5 @@ type IBotService =
   inherit IDeleteBotMessage
 
   inherit IAskForReply
+
+  inherit ISendNotification
