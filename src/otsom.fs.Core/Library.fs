@@ -1,7 +1,6 @@
 ﻿namespace otsom.fs.Core
 
-type UserId = UserId of string
+type UserId =
+  | UserId of string
 
-[<RequireQualifiedAccess>]
-module UserId =
-  let value (UserId id) = id
+  member this.Value = let (UserId id) = this in id
