@@ -1,5 +1,6 @@
 namespace otsom.fs.Bot
 
+open System.Runtime.InteropServices
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
 open System
@@ -59,7 +60,7 @@ type ButtonClickId =
   member this.Value = let (ButtonClickId id) = this in id
 
 type ISendNotification =
-  abstract SendNotification: ButtonClickId * string -> Task<unit>
+  abstract SendNotification: ButtonClickId * text: string -> Task<unit>
 
 type IBotService =
   inherit ISendMessage
