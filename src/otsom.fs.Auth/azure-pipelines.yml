@@ -4,7 +4,7 @@ trigger:
       - main
   paths:
     include:
-      - src/otsom.fs.Telegram.Bot.Auth.Spotify.Mongo/*
+      - src/otsom.fs.Auth/*
 
 pr:
   branches:
@@ -12,7 +12,7 @@ pr:
       - main
   paths:
     include:
-      - src/otsom.fs.Telegram.Bot.Auth.Spotify.Mongo/*
+      - src/otsom.fs.Auth/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -30,18 +30,18 @@ steps:
     name: Restore
     inputs:
       command: 'restore'
-      projects: 'src/otsom.fs.Telegram.Bot.Auth.Spotify.Mongo/*.fsproj'
+      projects: 'src/otsom.fs.Auth/*.fsproj'
   - task: DotNetCoreCLI@2
     name: Build
     inputs:
       command: 'build'
-      projects: 'src/otsom.fs.Telegram.Bot.Auth.Spotify.Mongo/*.fsproj'
+      projects: 'src/otsom.fs.Auth/*.fsproj'
       arguments: '-c $(BuildConfiguration)'
   - task: DotNetCoreCLI@2
     name: Pack
     inputs:
       command: 'pack'
-      packagesToPack: 'src/otsom.fs.Telegram.Bot.Auth.Spotify.Mongo/otsom.fs.Telegram.Bot.Auth.Spotify.Mongo.fsproj'
+      packagesToPack: 'src/otsom.fs.Auth/otsom.fs.Auth.fsproj'
       nobuild: true
       versionEnvVar: 'version'
       versioningScheme: 'byEnvVar'
