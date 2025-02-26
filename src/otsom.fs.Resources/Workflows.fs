@@ -1,55 +1,32 @@
-﻿module internal otsom.fs.Resources.Workflows
+﻿namespace otsom.fs.Resources
 
-open otsom.fs.Resources.Repos
-open otsom.fs.Extensions.Operators
+open otsom.fs.Resources
 open System
-open otsom.fs.Resources.Settings
 
-let private createResourcesMap (resources: Resource seq) =
-  resources
-  |> Seq.groupBy (_.Key)
-  |> Seq.map (fun (key, translations) -> (key, translations |> Seq.map (_.Value) |> Seq.head))
-  |> Map.ofSeq
+type DefaultResourceProvider(resources: Resource seq) =
+  let resources = Helpers.createResourcesMap resources
 
-let loadDefaultResources (settings: ResourcesSettings) (loadResources: ResourceRepo.LoadLangResources) : LoadDefaultResources =
-  fun () -> task {
-    let! resourcesMap = loadResources settings.DefaultLang &|> createResourcesMap
+  interface IResourceProvider with
+    member this.Item
+      with get (key: string): string = resources |> Map.tryFind key |> Option.defaultValue key
 
-    let getResource: GetResource =
-      fun key -> resourcesMap |> Map.tryFind key |> Option.defaultValue key
-
-    let formatResource: FormatResource =
-      fun key args ->
-        resourcesMap
+    member this.Item
+      with get (key: string, [<OptionalArgument>] args: obj array): string =
+        resources
         |> Map.tryFind key
         |> Option.map (fun r -> String.Format(r, args))
         |> Option.defaultValue key
 
-    return getResource, formatResource
-  }
+type ResourceProvider(defaultLocalizer: IResourceProvider, resources: Resource seq) =
+  let resources = Helpers.createResourcesMap resources
 
-let loadResources (settings: ResourcesSettings) (loadResources: ResourceRepo.LoadLangResources) : LoadResources =
-  fun lang -> task {
-    let! defaultResourcesMap = loadResources settings.DefaultLang &|> createResourcesMap
-    let! resourcesMap = loadResources lang &|> createResourcesMap
+  interface IResourceProvider with
+    member this.Item
+      with get (key: string): string = resources |> Map.tryFind key |> Option.defaultValue (defaultLocalizer[key])
 
-    let getResource: GetResource =
-      fun key ->
-        resourcesMap
-        |> Map.tryFind key
-        |> Option.defaultValue (defaultResourcesMap |> Map.tryFind key |> Option.defaultValue key)
-
-    let formatResource: FormatResource =
-      fun key args ->
-        resourcesMap
+    member this.Item
+      with get (key: String, [<OptionalArgument>] args: obj array): string =
+        resources
         |> Map.tryFind key
         |> Option.map (fun r -> String.Format(r, args))
-        |> Option.defaultValue (
-          defaultResourcesMap
-          |> Map.tryFind key
-          |> Option.map (fun r -> String.Format(r, args))
-          |> Option.defaultValue key
-        )
-
-    return getResource, formatResource
-  }
+        |> Option.defaultValue (defaultLocalizer[key, args])

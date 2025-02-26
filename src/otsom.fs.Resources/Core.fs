@@ -3,8 +3,9 @@
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
 
-type GetResource = string -> string
-type FormatResource = string -> obj seq -> string
+type IResourceProvider =
+  abstract Item: key: string -> string with get
+  abstract Item: key: string * [<OptionalArgument>] args: obj array -> string with get
 
-type LoadDefaultResources = unit -> Task<GetResource * FormatResource>
-type LoadResources = string -> Task<GetResource * FormatResource>
+type CreateDefaultResourceProvider = unit -> Task<IResourceProvider>
+type CreateResourceProvider = string -> Task<IResourceProvider>

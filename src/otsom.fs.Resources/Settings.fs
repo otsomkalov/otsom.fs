@@ -1,4 +1,4 @@
-﻿module otsom.fs.Resources.Settings
+﻿namespace otsom.fs.Resources
 
 [<CLIMutable>]
 type ResourcesSettings =

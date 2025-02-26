@@ -1,4 +1,4 @@
-﻿module otsom.fs.Resources.Repos
+﻿namespace otsom.fs.Resources
 
 open System.Threading.Tasks
 
@@ -7,5 +7,5 @@ type Resource =
     Value: string
     Lang: string }
 
-module ResourceRepo =
-  type LoadLangResources = string -> Task<Resource seq>
+type IResourceRepo =
+  abstract LoadResources: string -> Task<Resource seq>
