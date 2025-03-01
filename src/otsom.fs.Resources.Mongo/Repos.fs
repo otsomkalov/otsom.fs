@@ -1,10 +1,11 @@
-module otsom.fs.Resources.Mongo.Repos
+namespace otsom.fs.Resources.Mongo
 
 open MongoDB.Driver
-open otsom.fs.Resources.Repos
+open otsom.fs.Resources
 open MongoDB.Driver.Linq
 open otsom.fs.Extensions.Operators
 
-module ResourceRepo =
-  let loadLangResources (collection: IMongoCollection<Resource>) : ResourceRepo.LoadLangResources =
-    fun lang -> collection.AsQueryable().Where(fun r -> r.Lang = lang).ToListAsync() &|> seq
+type ResourceRepo(collection: IMongoCollection<Resource>) =
+  interface IResourceRepo with
+    member this.LoadResources(lang) =
+      collection.AsQueryable().Where(fun r -> r.Lang = lang).ToListAsync() &|> seq
