@@ -72,3 +72,17 @@ type ServiceCollection =
       let service5 = sp.GetRequiredService<'TDep5>()
 
       factory service1 service2 service3 service4 service5)
+
+  [<Extension>]
+  static member BuildSingleton<'TFunc, 'TDep1, 'TDep2, 'TDep3, 'TDep4, 'TDep5, 'TDep6 when 'TFunc: not struct>
+    (sc: IServiceCollection, factory)
+    =
+    sc.AddSingleton<'TFunc>(fun sp ->
+      let service1 = sp.GetRequiredService<'TDep1>()
+      let service2 = sp.GetRequiredService<'TDep2>()
+      let service3 = sp.GetRequiredService<'TDep3>()
+      let service4 = sp.GetRequiredService<'TDep4>()
+      let service5 = sp.GetRequiredService<'TDep5>()
+      let service6 = sp.GetRequiredService<'TDep6>()
+
+      factory service1 service2 service3 service4 service5 service6)
