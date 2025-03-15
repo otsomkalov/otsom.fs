@@ -4,6 +4,7 @@
     <Project Path="otsom.fs.Auth\otsom.fs.Auth.fsproj" Type="Classic F#"/>
   </Folder>
   <Folder Name="/Bot/">
+    <Project Path="otsom.fs.Bot.Dialog\otsom.fs.Bot.Dialog.fsproj" Type="Classic F#"/>
     <Project Path="otsom.fs.Bot.Telegram\otsom.fs.Bot.Telegram.fsproj" Type="Classic F#"/>
     <Project Path="otsom.fs.Bot\otsom.fs.Bot.fsproj" Type="Classic F#"/>
   </Folder>

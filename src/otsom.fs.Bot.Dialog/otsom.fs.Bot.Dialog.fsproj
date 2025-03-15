@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <UserSecretsId>c456af4f-9a0b-483d-9c62-1d8e01e82ad4</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Core.fs"/>
+    <Compile Include="Repos.fs"/>
+    <Compile Include="Workflows.fs"/>
+    <Compile Include="Startup.fs"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+    <PackageReference Include="otsom.fs.Extensions" Version="0.0.44"/>
+    <PackageReference Include="otsom.fs.Resources" Version="0.0.7"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\otsom.fs.Bot\otsom.fs.Bot.fsproj"/>
+  </ItemGroup>
+
+</Project>
