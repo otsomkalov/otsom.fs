@@ -21,13 +21,13 @@ type IDialogTemplateRepo =
   inherit ILoadDialogTemplate
 
 type ILoadOngoingDialog =
-  abstract LoadOngoingDialog: DialogId -> Task<Dialog.Ongoing>
+  abstract LoadOngoingDialog: DialogId -> Task<Ongoing>
 
 type IUpdateOngoingDialog =
-  abstract UpdateOngoingDialog: Dialog.Ongoing -> Task
+  abstract UpdateOngoingDialog: Ongoing -> Task<unit>
 
 type ISaveFinishedDialog =
-  abstract SaveFinishedDialog: Dialog.Finished -> Task
+  abstract SaveFinishedDialog: Finished -> Task<unit>
 
 type IGenerateDialogId =
   abstract GenerateDialogId: unit -> DialogId

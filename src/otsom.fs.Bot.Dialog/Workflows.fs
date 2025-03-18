@@ -1,4 +1,4 @@
-﻿namespace otsom.fs.Bot.Dialog.Workflows
+﻿namespace otsom.fs.Bot.Dialog
 
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
@@ -23,9 +23,9 @@ module internal Dialog =
     (dialogTemplateRepo: #ILoadDialogTemplate)
     (dialogRepo: #ISaveFinishedDialog & #IUpdateOngoingDialog)
     (resp: IResourceProvider)
-    (botService: #IAskForReply & #ISendMessage & #ISendKeyboard)
+    (botService: #ISendMessage & #ISendKeyboard)
     =
-    fun data (dialog: Dialog.Ongoing) ->
+    fun data (dialog: Ongoing) ->
       dialog.TemplateId |> dialogTemplateRepo.LoadDialogTemplate
       &|&> (fun template ->
         let currentStep =
@@ -35,10 +35,10 @@ module internal Dialog =
 
         if currentStep.Next = template.LastStep.Id then
           task {
-            let finishedDialog: Dialog.Finished =
+            let finishedDialog: Finished =
               { Id = dialog.Id
                 TemplateId = dialog.TemplateId
-                Data = dialog.Data }
+                Data = dialog.Data |> Map.add currentStep.Field data }
 
             do! dialogRepo.SaveFinishedDialog(finishedDialog)
 
@@ -69,27 +69,30 @@ type ChatDialogService
 
   interface IChatDialogService with
     member this.StartDialog(chatId, templateId) = task {
-      let! template = dialogTemplateRepo.LoadDialogTemplate templateId
-
-      do! sendKeyboardWithStopButton template.FirstStep.Resource []
-
-      let dialog: Dialog.Ongoing =
-        { Id = dialogRepo.GenerateDialogId()
-          TemplateId = templateId
-          Data = Map.empty
-          CurrentStepId = template.FirstStep.Id }
-
-      do! dialogRepo.UpdateOngoingDialog dialog
-
       let! chat = chatRepo.LoadChat chatId
 
-      let updatedChat =
-        { chat with
-            CurrentDialog = Some { DialogId = dialog.Id } }
+      match chat.CurrentDialog with
+      | Some _ -> return Error StartDialogError.DialogAlreadyStarted
+      | None ->
+        let! template = dialogTemplateRepo.LoadDialogTemplate templateId
 
-      do! chatRepo.UpdateChat updatedChat
+        do! sendKeyboardWithStopButton template.FirstStep.Resource []
 
-      return ()
+        let dialog: Ongoing =
+          { Id = dialogRepo.GenerateDialogId()
+            TemplateId = templateId
+            Data = Map.empty
+            CurrentStepId = template.FirstStep.Id }
+
+        do! dialogRepo.UpdateOngoingDialog dialog
+
+        let updatedChat =
+          { chat with
+              CurrentDialog = Some { DialogId = dialog.Id } }
+
+        do! chatRepo.UpdateChat updatedChat
+
+        return Ok()
     }
 
     member this.TryRunCurrentDialog(chatId, data) =

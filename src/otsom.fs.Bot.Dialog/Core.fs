@@ -32,23 +32,16 @@ type DialogTemplate =
     Steps: DialogStep list
     LastStep: DialogLastStep }
 
-type IDialogResult =
-  abstract FromDialogData: Map<string, obj> -> 'T
+type Ongoing =
+  { Id: DialogId
+    TemplateId: DialogTemplateId
+    CurrentStepId: DialogStepId
+    Data: Map<string, obj> }
 
-[<RequireQualifiedAccess>]
-module Dialog =
-  type IsStopCommand = string -> bool
-
-  type Ongoing =
-    { Id: DialogId
-      TemplateId: DialogTemplateId
-      CurrentStepId: DialogStepId
-      Data: Map<string, obj> }
-
-  type Finished =
-    { Id: DialogId
-      TemplateId: DialogTemplateId
-      Data: Map<string, obj> }
+type Finished =
+  { Id: DialogId
+    TemplateId: DialogTemplateId
+    Data: Map<string, obj> }
 
 type CurrentDialogId = string
 
@@ -59,21 +52,21 @@ type Chat =
   { Id: ChatId
     CurrentDialog: CurrentDialog option }
 
+type StartDialogError = | DialogAlreadyStarted
+
 type IStartDialog =
-  abstract StartDialog: ChatId * DialogTemplateId -> Task
+  abstract StartDialog: ChatId * DialogTemplateId -> Task<Result<unit, StartDialogError>>
 
 type DialogRunResult =
-  | Move of Dialog.Ongoing
-  | End of Dialog.Finished
+  | Move of Ongoing
+  | End of Finished
 
-type DialogRunError =
-  | NoDialog
+type DialogRunError = | NoDialog
 
 type ITryRunCurrentDialog =
   abstract TryRunCurrentDialog: ChatId * 'a -> Task<Result<DialogRunResult, DialogRunError>>
 
-type StopDialogError =
-  | NoDialog
+type StopDialogError = | NoDialog
 
 type IStopCurrentDialog =
   abstract StopCurrentDialog: ChatId -> Task<Result<unit, StopDialogError>>
