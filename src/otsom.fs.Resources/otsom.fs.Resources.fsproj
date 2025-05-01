@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.2"/>
     <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.2"/>
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4"/>
-    <PackageReference Include="otsom.fs.Extensions" Version="0.0.43"/>
+    <PackageReference Include="otsom.fs.Extensions" Version="0.0.44"/>
   </ItemGroup>
 
   <ItemGroup>
