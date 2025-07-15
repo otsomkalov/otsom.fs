@@ -1,6 +1,5 @@
 namespace otsom.fs.Bot
 
-open System.Runtime.InteropServices
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
 open System
@@ -20,6 +19,11 @@ type ChatId =
 
   member this.Value = let (ChatId id) = this in id
 
+type IMessage =
+  abstract ChatId: ChatId
+  abstract MessageId: ChatMessageId
+  abstract Text: string
+
 type ISendMessage =
   abstract SendMessage: string -> Task<BotMessageId>
 
@@ -32,6 +36,9 @@ type Keyboard = KeyboardButton seq seq
 
 type ISendKeyboard =
   abstract SendKeyboard: string * Keyboard -> Task<BotMessageId>
+
+type IRemoveKeyboard =
+  abstract RemoveKeyboard: string -> Task<BotMessageId>
 
 type IEditMessage =
   abstract EditMessage: BotMessageId * string -> Task<unit>
@@ -64,9 +71,11 @@ type ISendNotification =
 
 type IBotService =
   inherit ISendMessage
-  inherit ISendKeyboard
   inherit ISendMessageButtons
   inherit ISendLink
+
+  inherit ISendKeyboard
+  inherit IRemoveKeyboard
 
   inherit IReplyToMessage
 
@@ -78,5 +87,7 @@ type IBotService =
   inherit IAskForReply
 
   inherit ISendNotification
+
+type MessageHandler = IMessage -> Task<unit option>
 
 type BuildBotService = ChatId -> IBotService
