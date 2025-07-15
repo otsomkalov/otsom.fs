@@ -1,8 +1,10 @@
 ﻿[<RequireQualifiedAccess>]
 module otsom.fs.Extensions.Task
 
+open System.Diagnostics
 open System.Threading.Tasks
 
+[<StackTraceHidden>]
 let inline map ([<InlineIfLambda>] mapper: 'a -> 'b) (task': Task<'a>) : Task<'b> =
   task {
     let! value = task'
@@ -10,6 +12,7 @@ let inline map ([<InlineIfLambda>] mapper: 'a -> 'b) (task': Task<'a>) : Task<'b
     return mapper value
   }
 
+[<StackTraceHidden>]
 let inline bind ([<InlineIfLambda>] binder: 'a -> Task<'b>) (task': Task<'a>) : Task<'b> =
   task {
     let! value = task'
@@ -17,11 +20,13 @@ let inline bind ([<InlineIfLambda>] binder: 'a -> Task<'b>) (task': Task<'a>) : 
     return! binder value
   }
 
+[<StackTraceHidden>]
 let inline ignore (task': Task<'a>) : Task<unit> =
   task'
   |> map ignore
 
-let inline tap (action: 'a -> unit) (task': Task<'a>) =
+[<StackTraceHidden>]
+let inline tap ([<InlineIfLambda>] action: 'a -> unit) (task': Task<'a>) =
   task {
     let! v = task'
 
@@ -30,7 +35,8 @@ let inline tap (action: 'a -> unit) (task': Task<'a>) =
     return v
   }
 
-let inline taskTap (action: 'a -> Task<unit>) (task': Task<'a>) =
+[<StackTraceHidden>]
+let inline taskTap ([<InlineIfLambda>] action: 'a -> Task<unit>) (task': Task<'a>) =
   task {
     let! v = task'
 
