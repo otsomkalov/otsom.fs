@@ -5,36 +5,36 @@ open System.Diagnostics
 
 /// Task.map
 [<StackTraceHidden>]
-let (&|>) arg func = Task.map func arg
+let inline (&|>) arg ([<InlineIfLambda>] func) = Task.map func arg
 
 /// Task.tap
 [<StackTraceHidden>]
-let (&|!) arg func = Task.tap func arg
+let inline (&|!) arg ([<InlineIfLambda>] func) = Task.tap func arg
 
 /// Task.bind
 [<StackTraceHidden>]
-let (&|&>) arg func = Task.bind func arg
+let inline (&|&>) arg ([<InlineIfLambda>] func) = Task.bind func arg
 
 /// Result.map
 [<StackTraceHidden>]
-let (=|>) arg func = Result.map func arg
+let inline (=|>) arg ([<InlineIfLambda>] func) = Result.map func arg
 
 /// Result.bind
 [<StackTraceHidden>]
-let (=|=>) arg func = Result.bind func arg
+let inline (=|=>) arg ([<InlineIfLambda>] func) = Result.bind func arg
 
 /// Result.taskMap
 [<StackTraceHidden>]
-let (=|&>) arg func = Result.taskMap func arg
+let inline (=|&>) arg ([<InlineIfLambda>] func) = Result.taskMap func arg
 
 /// TaskResult.map
 [<StackTraceHidden>]
-let (&=|>) arg func = TaskResult.map func arg
+let inline (&=|>) arg ([<InlineIfLambda>] func) = TaskResult.map func arg
 
 /// TaskResult.taskMap
 [<StackTraceHidden>]
-let (&=|&>) arg func = TaskResult.taskMap func arg
+let inline (&=|&>) arg ([<InlineIfLambda>] func) = TaskResult.taskMap func arg
 
 /// TaskResult.taskTap
 [<StackTraceHidden>]
-let (&=|&!) arg func = TaskResult.taskTap func arg
+let inline (&=|&!) arg ([<InlineIfLambda>] func) = TaskResult.taskTap func arg
