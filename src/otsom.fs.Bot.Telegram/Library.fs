@@ -66,6 +66,15 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
       )
       &|> (_.MessageId >> BotMessageId)
 
+    member this.RemoveKeyboard(text) =
+      bot.SendMessage(
+        (chatId.Value |> ChatId),
+        text |> escapeMarkdownString,
+        replyMarkup = ReplyKeyboardRemove(),
+        parseMode = ParseMode.MarkdownV2
+      )
+      &|> (_.MessageId >> BotMessageId)
+
     member this.SendLink(text, linkTitle, link) =
       let linkButton = InlineKeyboardButton.WithUrl(linkTitle, link.ToString())
 
