@@ -59,8 +59,7 @@ type AuthRepo(authOptions: IOptions<AuthSettings>, db: IMongoDatabase) =
 
     member this.SaveCompletedAuth(auth) =
       let filter =
-        Builders<Entities.UserToken>.Filter
-          .Eq((fun t -> t.AccountId), auth.AccountId.Value)
+        Builders<Entities.UserToken>.Filter.Eq((fun t -> t.AccountId), auth.AccountId.Value)
 
       tokenCollection.ReplaceOneAsync(filter, Entities.UserToken.FromCompleted auth, ReplaceOptions(IsUpsert = true))
       |> Task.map ignore

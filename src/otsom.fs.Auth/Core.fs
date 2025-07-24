@@ -40,7 +40,9 @@ type Fulfilled =
     State: State
     Code: Code }
 
-type Completed = { AccountId: AccountId; Token: RefreshToken }
+type Completed =
+  { AccountId: AccountId
+    Token: RefreshToken }
 
 type IInitAuth =
   abstract InitAuth: accountId: AccountId -> Task<Uri>
