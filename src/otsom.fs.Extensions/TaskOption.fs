@@ -15,11 +15,10 @@ let inline tap ([<InlineIfLambda>] effect: 'a -> unit) (taskOption: Task<'a opti
   taskOption |> Task.map (Option.tap effect)
 
 [<StackTraceHidden>]
-let inline taskBind ([<InlineIfLambda>] binder: 'a -> Task<'b option>) (opt: Task<'a option>) : Task<'b option> =
-  task {
-    let! value = opt
+let inline taskBind ([<InlineIfLambda>] binder: 'a -> Task<'b option>) (opt: Task<'a option>) : Task<'b option> = task {
+  let! value = opt
 
-    match value with
-    | None -> return None
-    | Some v -> return! binder v
-  }
+  match value with
+  | None -> return None
+  | Some v -> return! binder v
+}
