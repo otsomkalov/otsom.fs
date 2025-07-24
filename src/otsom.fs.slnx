@@ -1,20 +1,19 @@
 ﻿<Solution>
   <Folder Name="/Auth/">
-    <Project Path="otsom.fs.Auth.Spotify\otsom.fs.Auth.Spotify.fsproj" Type="Classic F#"/>
-    <Project Path="otsom.fs.Auth\otsom.fs.Auth.fsproj" Type="Classic F#"/>
+    <Project Path="otsom.fs.Auth.Spotify\otsom.fs.Auth.Spotify.fsproj" Type="Classic F#" />
+    <Project Path="otsom.fs.Auth\otsom.fs.Auth.fsproj" Type="Classic F#" />
   </Folder>
   <Folder Name="/Bot/">
-    <Project Path="otsom.fs.Bot.Telegram\otsom.fs.Bot.Telegram.fsproj" Type="Classic F#"/>
-    <Project Path="otsom.fs.Bot\otsom.fs.Bot.fsproj" Type="Classic F#"/>
+    <Project Path="otsom.fs.Bot.Telegram\otsom.fs.Bot.Telegram.fsproj" Type="Classic F#" />
+    <Project Path="otsom.fs.Bot\otsom.fs.Bot.fsproj" Type="Classic F#" />
   </Folder>
   <Folder Name="/Extensions/">
-    <Project Path="otsom.fs.Extensions\otsom.fs.Extensions.fsproj" Type="Classic F#"/>
-    <Project Path="otsom.fs.Extensions.DependencyInjection\otsom.fs.Extensions.DependencyInjection.fsproj" Type="Classic F#"/>
-    <Project Path="otsom.fs.Extensions.Tests\otsom.fs.Extensions.Tests.fsproj" Type="Classic F#"/>
+    <Project Path="otsom.fs.Extensions.DependencyInjection\otsom.fs.Extensions.DependencyInjection.fsproj" Type="Classic F#" />
+    <Project Path="otsom.fs.Extensions.Tests\otsom.fs.Extensions.Tests.fsproj" Type="Classic F#" />
+    <Project Path="otsom.fs.Extensions\otsom.fs.Extensions.fsproj" Type="Classic F#" />
   </Folder>
   <Folder Name="/Resources/">
-    <Project Path="otsom.fs.Resources\otsom.fs.Resources.fsproj" Type="Classic F#"/>
-    <Project Path="otsom.fs.Resources.Mongo\otsom.fs.Resources.Mongo.fsproj" Type="Classic F#"/>
+    <Project Path="otsom.fs.Resources.Mongo\otsom.fs.Resources.Mongo.fsproj" Type="Classic F#" />
+    <Project Path="otsom.fs.Resources\otsom.fs.Resources.fsproj" Type="Classic F#" />
   </Folder>
-  <Project Path="otsom.fs.Core\otsom.fs.Core.fsproj" Type="Classic F#"/>
 </Solution>
