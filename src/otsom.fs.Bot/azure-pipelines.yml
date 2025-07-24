@@ -27,6 +27,18 @@ steps:
     inputs:
       version: '8.x'
   - task: DotNetCoreCLI@2
+    displayName: "Install Fantomas tool"
+    inputs:
+      command: 'custom'
+      custom: 'tool'
+      arguments: 'install -g fantomas'
+  - task: Bash@3
+    displayName: "Run Fantomas check"
+    inputs:
+      targetType: 'inline'
+      script: |
+        fantomas "src/otsom.fs.Bot" --check
+  - task: DotNetCoreCLI@2
     name: Restore
     inputs:
       command: 'restore'
