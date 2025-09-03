@@ -1,4 +1,4 @@
-﻿module otsom.fs.Extensions.Tests.Operators
+﻿module Operators
 
 open System.Threading.Tasks
 open Xunit
