@@ -7,7 +7,7 @@ open otsom.fs.Extensions
 
 module Helpers =
   let internal escapeMarkdownString (str: string) =
-    Regex.Replace(str, "([\(\)`\.#\-!+=&\?<>])", "\$1")
+    Regex.Replace(str, "([\(\)`\._#\-!+=&\?<>])", "\$1")
 
   let (|Message|_|) (update: Update) =
     update
