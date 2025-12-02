@@ -23,24 +23,6 @@ let inline taskBind ([<InlineIfLambda>] binder) result =
   | Ok x -> binder x
 
 [<StackTraceHidden>]
-let inline either
-  ([<InlineIfLambda>] onOk: 'okInput -> 'output)
-  ([<InlineIfLambda>] onError: 'errorInput -> 'output)
-  (input: Result<'okInput, 'errorInput>)
-  : 'output =
-  match input with
-  | Ok x -> onOk x
-  | Error err -> onError err
-
-[<StackTraceHidden>]
-let inline tap ([<InlineIfLambda>] action: 'okInput -> unit) (input: Result<'okInput, 'errorInput>) : Result<'okInput, 'errorInput> =
-  match input with
-  | Ok x ->
-    action x
-    Ok x
-  | Error err -> Error err
-
-[<StackTraceHidden>]
 let inline taskTap
   ([<InlineIfLambda>] action: 'okInput -> Task<unit>)
   (input: Result<'okInput, 'errorInput>)

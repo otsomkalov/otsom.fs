@@ -35,5 +35,4 @@ let ``prepend prepends list2 to list1`` () =
 
   let result = List.prepend list1 list2
 
-  result
-  |> should equal [ 3; 4; 1; 2 ]
+  result |> should equal [ 3; 4; 1; 2 ]

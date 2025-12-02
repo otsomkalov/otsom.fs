@@ -7,36 +7,34 @@ open FsUnit.Xunit
 open System.Threading.Tasks
 
 [<Fact>]
-let ``defaultWithTask return value if Option is Some`` () =
-  task {
-    // Assert
+let ``defaultWithTask return value if Option is Some`` () = task {
+  // Assert
 
-    let value = Some 42
+  let value = Some 42
 
-    // Act
+  // Act
 
-    let! result = value |> Option.defaultWithTask (fun _ -> raise (NotImplementedException()))
+  let! result = value |> Option.defaultWithTask (fun _ -> raise (NotImplementedException()))
 
-    // Assert
+  // Assert
 
-    result |> should equal 42
-  }
+  result |> should equal 42
+}
 
 [<Fact>]
-let ``defaultWithTask executes defThunkTask if option is None`` () =
-  task {
-    // Assert
+let ``defaultWithTask executes defThunkTask if option is None`` () = task {
+  // Assert
 
-    let value = None
+  let value = None
 
-    // Act
+  // Act
 
-    let! result = value |> Option.defaultWithTask (fun _ -> 42 |> Task.FromResult)
+  let! result = value |> Option.defaultWithTask (fun _ -> 42 |> Task.FromResult)
 
-    // Assert
+  // Assert
 
-    result |> should equal 42
-  }
+  result |> should equal 42
+}
 
 [<Fact>]
 let ``someIf returns Some if predicate is true`` () =
