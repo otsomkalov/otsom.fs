@@ -3,6 +3,7 @@ module otsom.fs.Extensions.TaskResult
 
 open System.Diagnostics
 open System.Threading.Tasks
+open FsToolkit.ErrorHandling
 
 let ok v = Ok v |> Task.FromResult
 

@@ -2,6 +2,7 @@
 
 open System.Diagnostics
 open System.Threading.Tasks
+open FsToolkit.ErrorHandling
 
 [<StackTraceHidden>]
 let ofOption error option =

@@ -3,6 +3,7 @@ module otsom.fs.Extensions.Option
 
 open System.Diagnostics
 open System.Threading.Tasks
+open FsToolkit.ErrorHandling
 
 [<StackTraceHidden>]
 let inline taskMap ([<InlineIfLambda>] mapping: 'a -> Task<'b>) option =

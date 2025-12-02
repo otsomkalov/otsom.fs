@@ -2,10 +2,7 @@
 module otsom.fs.Extensions.Operators
 
 open System.Diagnostics
-
-/// Task.map
-[<StackTraceHidden>]
-let inline (&|>) arg ([<InlineIfLambda>] func) = Task.map func arg
+open FsToolkit.ErrorHandling
 
 /// Task.tap
 [<StackTraceHidden>]
