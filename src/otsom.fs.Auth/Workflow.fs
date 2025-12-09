@@ -3,6 +3,7 @@
 open System.Threading.Tasks
 open otsom.fs.Auth.Repo
 open otsom.fs.Extensions
+open FsToolkit.ErrorHandling
 
 type AuthService(authRepo: IAuthRepo) =
   interface IAuthService with
