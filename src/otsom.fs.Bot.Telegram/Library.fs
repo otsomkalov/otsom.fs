@@ -4,9 +4,9 @@ open Telegram.Bot.Types.Enums
 open otsom.fs.Bot
 open Telegram.Bot
 open Telegram.Bot.Types
-open otsom.fs.Extensions
 open otsom.fs.Bot.Telegram.Helpers
 open Telegram.Bot.Types.ReplyMarkups
+open FsToolkit.ErrorHandling
 
 type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
   let getReplyMarkup (keyboard: Keyboard) =
@@ -20,7 +20,7 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
   interface IBotService with
     member this.SendMessage(text) =
       bot.SendMessage((chatId.Value |> ChatId), text |> escapeMarkdownString, parseMode = ParseMode.MarkdownV2)
-      &|> (_.MessageId >> BotMessageId)
+      |> Task.map (_.MessageId >> BotMessageId)
 
     member this.AskForReply(text) =
       bot.SendMessage(
@@ -29,14 +29,14 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         parseMode = ParseMode.MarkdownV2,
         replyMarkup = ForceReplyMarkup()
       )
-      &|> ignore
+      |> Task.map ignore
 
     member this.DeleteBotMessage(botMessageId) =
       bot.DeleteMessage(chatId.Value, botMessageId.Value)
 
     member this.EditMessage(botMessageId, text) =
       bot.EditMessageText((chatId.Value |> ChatId), botMessageId.Value, text |> escapeMarkdownString, parseMode = ParseMode.MarkdownV2)
-      &|> ignore
+      |> Task.map ignore
 
     member this.EditMessageButtons(botMessageId, text, buttons) =
       bot.EditMessageText(
@@ -46,7 +46,7 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         replyMarkup = getInlineMarkup buttons,
         parseMode = ParseMode.MarkdownV2
       )
-      &|> ignore
+      |> Task.map ignore
 
     member this.ReplyToMessage(chatMessageId, text) =
       bot.SendMessage(
@@ -55,7 +55,7 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         parseMode = ParseMode.MarkdownV2,
         replyParameters = chatMessageId.Value
       )
-      &|> (_.MessageId >> BotMessageId)
+      |> Task.map (_.MessageId >> BotMessageId)
 
     member this.SendKeyboard(text, keyboard) =
       bot.SendMessage(
@@ -64,7 +64,7 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         replyMarkup = getReplyMarkup keyboard,
         parseMode = ParseMode.MarkdownV2
       )
-      &|> (_.MessageId >> BotMessageId)
+      |> Task.map (_.MessageId >> BotMessageId)
 
     member this.RemoveKeyboard(text) =
       bot.SendMessage(
@@ -73,7 +73,7 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         replyMarkup = ReplyKeyboardRemove(),
         parseMode = ParseMode.MarkdownV2
       )
-      &|> (_.MessageId >> BotMessageId)
+      |> Task.map (_.MessageId >> BotMessageId)
 
     member this.SendLink(text, linkTitle, link) =
       let linkButton = InlineKeyboardButton.WithUrl(linkTitle, link.ToString())
@@ -84,7 +84,7 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         parseMode = ParseMode.MarkdownV2,
         replyMarkup = InlineKeyboardMarkup linkButton
       )
-      &|> (_.MessageId >> BotMessageId)
+      |> Task.map (_.MessageId >> BotMessageId)
 
     member this.SendMessageButtons(text, buttons) =
       bot.SendMessage(
@@ -93,6 +93,6 @@ type BotService(bot: ITelegramBotClient, chatId: otsom.fs.Bot.ChatId) =
         replyMarkup = getInlineMarkup buttons,
         parseMode = ParseMode.MarkdownV2
       )
-      &|> (_.MessageId >> BotMessageId)
+      |> Task.map (_.MessageId >> BotMessageId)
 
     member this.SendNotification(clickId, text) = task { do! bot.AnswerCallbackQuery(clickId.Value, text) }
