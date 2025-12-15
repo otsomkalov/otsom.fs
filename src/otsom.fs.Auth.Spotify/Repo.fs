@@ -1,14 +1,13 @@
 ﻿module otsom.fs.Auth.Spotify.Repo
 
-open System.Threading.Tasks
 open Microsoft.Extensions.Options
 open MongoDB.Driver
 open SpotifyAPI.Web
 open otsom.fs.Auth
 open otsom.fs.Auth.Repo
 open otsom.fs.Auth.Settings
-open otsom.fs.Extensions
 open System.Collections.Generic
+open FsToolkit.ErrorHandling
 
 type AuthRepo(authOptions: IOptions<AuthSettings>, db: IMongoDatabase) =
   let authCollection = db.GetCollection "auth"
