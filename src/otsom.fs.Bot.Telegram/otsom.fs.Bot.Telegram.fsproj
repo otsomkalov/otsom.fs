@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.1"/>
     <PackageReference Include="otsom.fs.Extensions" Version="0.0.52"/>
-    <PackageReference Include="Telegram.Bot" Version="22.7.6" />
+    <PackageReference Include="Telegram.Bot" Version="22.8.1" />
     <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.24"/>
     <PackageReference Include="otsom.fs.Bot" Version="[0.0.39,)"/>
   </ItemGroup>
