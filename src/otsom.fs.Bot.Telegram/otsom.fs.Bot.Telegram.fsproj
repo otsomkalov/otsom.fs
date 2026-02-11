@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.3"/>
     <PackageReference Include="otsom.fs.Extensions" Version="0.0.52"/>
     <PackageReference Include="Telegram.Bot" Version="22.9.0" />
-    <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.26"/>
+    <PackageReference Include="otsom.fs.Extensions.DependencyInjection" Version="0.0.28"/>
     <PackageReference Include="otsom.fs.Bot" Version="[0.0.39,)"/>
   </ItemGroup>
 

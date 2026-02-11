@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.6.0"/>
     <PackageReference Include="SpotifyAPI.Web" Version="7.2.1"/>
-    <PackageReference Include="otsom.fs.Auth" Version="0.0.35"/>
+    <PackageReference Include="otsom.fs.Auth" Version="0.0.37"/>
   </ItemGroup>
 
 </Project>
