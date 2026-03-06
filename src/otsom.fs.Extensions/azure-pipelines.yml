@@ -75,20 +75,16 @@ stages:
     jobs:
       - deployment: Deploy
         displayName: Deploy job
-        environment: 'NuGet.org'
         strategy:
           runOnce:
             deploy:
               steps:
-                - task: DownloadPipelineArtifact@2
-                  inputs:
-                    buildType: 'current'
-                    artifactName: 'drop'
-                    targetPath: '$(Pipeline.Workspace)/drop'
+                - download: current
+                  artifact: drop
                 - task: DotNetCoreCLI@2
                   displayName: 'Push to NuGet.org'
                   inputs:
                     command: 'push'
                     packagesToPush: '$(Pipeline.Workspace)/drop/*.nupkg'
                     nuGetFeedType: 'external'
-                    publishFeedCredentials: 'NuGet.org'
+                    publishFeedCredentials: 'nuget'
