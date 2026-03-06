@@ -74,7 +74,7 @@ jobs:
           steps:
             - download: current
               artifact: drop
-            - task: DotNetCoreCLI@2
+            - task: NuGetCommand@2
               displayName: 'Push to NuGet.org'
               inputs:
                 command: 'push'
