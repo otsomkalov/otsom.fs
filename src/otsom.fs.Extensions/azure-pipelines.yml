@@ -75,6 +75,7 @@ stages:
     jobs:
       - deployment: Deploy
         displayName: Deploy job
+        environment: prd
         strategy:
           runOnce:
             deploy:
