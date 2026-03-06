@@ -15,7 +15,7 @@ pr:
       - src/otsom.fs.Extensions/*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
