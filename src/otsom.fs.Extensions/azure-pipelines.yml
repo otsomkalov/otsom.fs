@@ -24,7 +24,6 @@ variables:
 
 jobs:
   - job: Build
-    displayName: Build job
     steps:
       - task: UseDotNet@2
         inputs:
@@ -66,8 +65,8 @@ jobs:
           targetPath: '$(Build.ArtifactStagingDirectory)'
           artifact: 'drop'
   - deployment: Deploy
-    displayName: Deploy job
     environment: prd
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     strategy:
       runOnce:
         deploy:
