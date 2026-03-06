@@ -74,6 +74,9 @@ jobs:
           steps:
             - download: current
               artifact: drop
+            - task: NuGetAuthenticate@1
+              inputs:
+                nuGetServiceConnections: 'nuget'
             - task: DotNetCoreCLI@2
               displayName: 'Push to NuGet.org'
               inputs:
