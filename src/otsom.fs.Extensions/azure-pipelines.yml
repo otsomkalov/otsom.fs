@@ -68,7 +68,7 @@ jobs:
     pool:
       vmImage: 'windows-latest'
     dependsOn: Build
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+#    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     strategy:
       runOnce:
         deploy:
