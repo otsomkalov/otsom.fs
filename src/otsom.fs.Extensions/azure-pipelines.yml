@@ -14,9 +14,6 @@ pr:
     include:
       - src/otsom.fs.Extensions/*
 
-pool:
-  vmImage: 'windows-latest'
-
 variables:
   revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
   version: '$(major).$(minor).$(revision)'
@@ -24,6 +21,8 @@ variables:
 
 jobs:
   - job: Build
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
       - task: UseDotNet@2
         inputs:
@@ -66,6 +65,9 @@ jobs:
           artifact: 'drop'
   - deployment: Deploy
     environment: prd
+    pool:
+      vmImage: 'windows-latest'
+    dependsOn: Build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     strategy:
       runOnce:
