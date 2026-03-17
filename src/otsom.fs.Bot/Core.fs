@@ -66,6 +66,9 @@ type ButtonClickId =
 
   member this.Value = let (ButtonClickId id) = this in id
 
+type IChat =
+  abstract Id: ChatId
+
 type ISendNotification =
   abstract SendNotification: ButtonClickId * text: string -> Task<unit>
 
