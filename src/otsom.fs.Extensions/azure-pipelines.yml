@@ -14,17 +14,15 @@ pr:
     include:
       - src/otsom.fs.Extensions/*
 
-pool:
-  vmImage: 'windows-latest'
-
 variables:
-  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
-  version: '$(major).$(minor).$(revision)'
   BuildConfiguration: 'Release'
 
 jobs:
   - job: Build
+    pool: "self-hosted"
     steps:
+      - checkout: self
+        fetchDepth: 0
       - task: UseDotNet@2
         inputs:
           version: '8.x'
@@ -57,8 +55,6 @@ jobs:
           command: 'pack'
           packagesToPack: 'src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj'
           nobuild: true
-          versionEnvVar: 'version'
-          versioningScheme: 'byEnvVar'
       - task: PublishPipelineArtifact@1
         name: Publish
         inputs:
@@ -66,6 +62,9 @@ jobs:
           artifact: 'drop'
   - deployment: Deploy
     environment: prd
+    pool:
+      vmImage: 'windows-latest'
+    dependsOn: Build
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     strategy:
       runOnce:
