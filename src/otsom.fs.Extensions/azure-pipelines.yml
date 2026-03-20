@@ -22,7 +22,7 @@ jobs:
     pool: "self-hosted"
     steps:
       - checkout: self
-        fetchDepth: 0 
+        fetchDepth: 0
       - task: UseDotNet@2
         inputs:
           version: '8.x'
@@ -65,7 +65,7 @@ jobs:
     pool:
       vmImage: 'windows-latest'
     dependsOn: Build
-#    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
     strategy:
       runOnce:
         deploy:
