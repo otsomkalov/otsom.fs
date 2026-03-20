@@ -15,8 +15,6 @@ pr:
       - src/otsom.fs.Extensions/*
 
 variables:
-  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
-  version: '$(major).$(minor).$(revision)'
   BuildConfiguration: 'Release'
 
 jobs:
@@ -55,8 +53,6 @@ jobs:
           command: 'pack'
           packagesToPack: 'src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj'
           nobuild: true
-          versionEnvVar: 'version'
-          versioningScheme: 'byEnvVar'
       - task: PublishPipelineArtifact@1
         name: Publish
         inputs:
