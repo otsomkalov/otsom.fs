@@ -9,4 +9,8 @@
     <Compile Include="Core.fs"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="version.json" />
+  </ItemGroup>
+
 </Project>

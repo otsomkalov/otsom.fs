@@ -15,4 +15,8 @@
     <PackageReference Include="otsom.fs.Resources" Version="0.0.57"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="version.json" />
+  </ItemGroup>
+
 </Project>

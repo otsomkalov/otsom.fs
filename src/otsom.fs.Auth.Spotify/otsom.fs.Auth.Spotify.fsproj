@@ -18,4 +18,8 @@
     <PackageReference Include="otsom.fs.Auth" Version="0.0.37"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="version.json" />
+  </ItemGroup>
+
 </Project>
