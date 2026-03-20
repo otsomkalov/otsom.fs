@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\otsom.fs.Extensions\otsom.fs.Extensions.fsproj" />
+    <ProjectReference Include="..\..\src\otsom.fs.Extensions\otsom.fs.Extensions.fsproj" />
   </ItemGroup>
 
 </Project>
