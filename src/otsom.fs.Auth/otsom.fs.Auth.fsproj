@@ -21,8 +21,4 @@
     <PackageReference Include="otsom.fs.Extensions" Version="0.0.65"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="version.json" />
-  </ItemGroup>
-
 </Project>

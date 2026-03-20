@@ -22,8 +22,4 @@
     <Compile Include="Startup.fs"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="version.json" />
-  </ItemGroup>
-
 </Project>
