@@ -21,6 +21,8 @@ jobs:
   - job: Build
     pool: "self-hosted"
     steps:
+      - checkout: self
+        fetchDepth: 0 
       - task: UseDotNet@2
         inputs:
           version: '8.x'
