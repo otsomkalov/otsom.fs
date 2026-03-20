@@ -14,7 +14,6 @@
     <Compile Include="Option.fs"/>
     <Compile Include="TaskOption.fs"/>
     <Compile Include="Operators.fs"/>
-    <Content Include="version.json" />
   </ItemGroup>
 
   <ItemGroup>
