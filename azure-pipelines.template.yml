@@ -1,25 +1,16 @@
 ﻿parameters:
 - name: projectName
   type: string
-- name: dotnetVersion
-  type: string
-  default: '8.x'
-- name: buildConfiguration
-  type: string
-  default: 'Release'
-- name: poolName
-  type: string
-  default: 'self-hosted'
 
 jobs:
   - job: Build
-    pool: ${{ parameters.poolName }}
+    pool: 'self-hosted'
     steps:
       - checkout: self
         fetchDepth: 0
       - task: UseDotNet@2
         inputs:
-          version: ${{ parameters.dotnetVersion }}
+          version: '9.x'
       - task: DotNetCoreCLI@2
         displayName: "Install Fantomas tool"
         inputs:
@@ -42,7 +33,7 @@ jobs:
         inputs:
           command: 'build'
           projects: 'src/${{ parameters.projectName }}/*.fsproj'
-          arguments: '-c ${{ parameters.buildConfiguration }}'
+          arguments: '-c Release'
       - task: DotNetCoreCLI@2
         name: Pack
         inputs:
