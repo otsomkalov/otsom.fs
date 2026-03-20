@@ -21,8 +21,7 @@ variables:
 
 jobs:
   - job: Build
-    pool:
-      vmImage: 'ubuntu-latest'
+    pool: "self-hosted"
     steps:
       - task: UseDotNet@2
         inputs:
