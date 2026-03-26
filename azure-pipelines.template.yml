@@ -10,7 +10,7 @@ jobs:
         fetchDepth: 0
       - task: UseDotNet@2
         inputs:
-          version: '9.x'
+          version: '10.x'
       - task: DotNetCoreCLI@2
         displayName: "Install Fantomas tool"
         inputs:
