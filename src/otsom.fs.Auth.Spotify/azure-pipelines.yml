@@ -15,6 +15,6 @@ pr:
       - src/otsom.fs.Auth.Spotify/*
 
 extends:
-  template: /azure-pipelines.template.yml
+  template: ../../azure-pipelines.template.yml
   parameters:
     projectName: 'otsom.fs.Auth.Spotify'
