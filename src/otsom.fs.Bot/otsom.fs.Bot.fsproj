@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="Core.fs"/>
+    <Compile Include="Builders.fs" />
   </ItemGroup>
 
 </Project>

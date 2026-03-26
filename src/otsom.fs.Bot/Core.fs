@@ -74,6 +74,8 @@ type Click =
 type IChat =
   abstract Id: ChatId
 
+type ClickHandler<'chat when 'chat :> IChat> = 'chat -> Click -> Task<unit option>
+
 type ISendNotification =
   abstract SendNotification: ButtonClickId * text: string -> Task<unit>
 
