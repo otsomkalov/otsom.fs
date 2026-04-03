@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="Core.fs"/>
-    <Compile Include="Builders.fs" />
+    <Compile Include="Builders.fs"/>
   </ItemGroup>
 
 </Project>

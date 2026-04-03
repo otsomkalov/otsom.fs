@@ -6,14 +6,15 @@
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
     <IsTestProject>true</IsTestProject>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\otsom.fs.Bot\otsom.fs.Bot.fsproj" />
+    <ProjectReference Include="..\..\src\otsom.fs.Bot\otsom.fs.Bot.fsproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Builders.fs" />
+    <Compile Include="Builders.fs"/>
   </ItemGroup>
 
   <ItemGroup>
