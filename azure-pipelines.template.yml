@@ -58,7 +58,7 @@ jobs:
         name: Publish
         inputs:
           targetPath: '$(Build.ArtifactStagingDirectory)'
-          artifact: 'drop'
+          artifact: 'library'
   - deployment: Deploy
     environment: prd
     pool:
@@ -70,11 +70,11 @@ jobs:
         deploy:
           steps:
             - download: current
-              artifact: drop
+              artifact: library
             - task: NuGetCommand@2
               displayName: 'Push to NuGet.org'
               inputs:
                 command: 'push'
-                packagesToPush: '$(Pipeline.Workspace)/drop/*.nupkg'
+                packagesToPush: '$(Pipeline.Workspace)/library/*.nupkg'
                 nuGetFeedType: 'external'
                 publishFeedCredentials: 'nuget'
