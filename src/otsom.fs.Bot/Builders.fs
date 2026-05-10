@@ -25,3 +25,26 @@ type ClickHandlersBuilder() =
   member _.Run(f: ClickHandler<'chat>) = f
 
 let clickHandlers = ClickHandlersBuilder()
+
+type MessageHandlersBuilder() =
+  member _.Return(()) : MessageHandler<'chat, 'msg> = fun _ _ -> Task.FromResult(None)
+  member _.Zero() : MessageHandler<'chat, 'msg> = fun _ _ -> Task.FromResult(None)
+
+  member _.Yield(f: MessageHandler<'chat, 'msg>) = f
+  member _.YieldFrom(f: MessageHandler<'chat, 'msg>) = f
+
+  member _.Combine(h1: MessageHandler<'chat, 'msg>, h2: MessageHandler<'chat, 'msg>) : MessageHandler<'chat, 'msg> =
+    fun chat msg -> task {
+      let! v1 = h1 chat msg
+      and! v2 = h2 chat msg
+
+      match v1, v2 with
+      | Some(), _ -> return Some()
+      | _, Some() -> return Some()
+      | _ -> return None
+    }
+
+  member _.Delay(f: unit -> MessageHandler<'chat, 'msg>) = f ()
+  member _.Run(f: MessageHandler<'chat, 'msg>) = f
+
+let messageHandlers = MessageHandlersBuilder()
