@@ -20,9 +20,7 @@ type ChatId =
   member this.Value = let (ChatId id) = this in id
 
 type IMessage =
-  abstract ChatId: ChatId
-  abstract MessageId: ChatMessageId
-  abstract Text: string
+  abstract Id: ChatMessageId
 
 type ISendMessage =
   abstract SendMessage: string -> Task<BotMessageId>
@@ -98,6 +96,6 @@ type IBotService =
 
   inherit ISendNotification
 
-type MessageHandler = IMessage -> Task<unit option>
-
 type BuildBotService = ChatId -> IBotService
+
+type MessageHandler<'chat, 'msg when 'chat :> IChat and 'msg :> IMessage> = 'chat -> 'msg -> Task<unit option>
