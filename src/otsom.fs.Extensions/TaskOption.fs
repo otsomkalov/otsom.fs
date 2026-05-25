@@ -10,4 +10,4 @@ let inline taskMap ([<InlineIfLambda>] mapping: 'a -> Task<'b>) = Task.bind (Opt
 
 [<StackTraceHidden>]
 let inline tap ([<InlineIfLambda>] effect: 'a -> unit) (taskOption: Task<'a option>) : Task<'a option> =
-  taskOption |> Task.map (Option.tap effect)
+  taskOption |> Task.map (Option.teeSome effect)

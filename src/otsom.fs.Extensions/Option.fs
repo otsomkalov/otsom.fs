@@ -18,14 +18,6 @@ let inline defaultWithTask ([<InlineIfLambda>] defThunkTask: unit -> Task<'a>) o
   | None -> defThunkTask ()
 
 [<StackTraceHidden>]
-let inline tap ([<InlineIfLambda>] effect: 'a -> unit) (option: 'a option) : 'a option =
-  match option with
-  | Some v ->
-    do effect v
-    option
-  | None -> option
-
-[<StackTraceHidden>]
 let inline someIf ([<InlineIfLambda>] predicate: 'a -> bool) (value: 'a) =
   if predicate value then Some value else None
 
