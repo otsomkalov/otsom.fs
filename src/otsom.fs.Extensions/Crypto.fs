@@ -13,12 +13,15 @@ let private NonceSize = 12
 [<Literal>]
 let private TagSize = 16
 
+[<Literal>]
+let KeyDeriveIterations = 100_000
+
 let encrypt (key: string) (plaintext: string) =
   let salt = RandomNumberGenerator.GetBytes SaltSize
   let nonce = RandomNumberGenerator.GetBytes NonceSize // Recommended size for GCM
 
   let key =
-    Rfc2898DeriveBytes.Pbkdf2(key, salt, 100_000, HashAlgorithmName.SHA256, 32)
+    Rfc2898DeriveBytes.Pbkdf2(key, salt, KeyDeriveIterations, HashAlgorithmName.SHA256, 32)
 
   let plaintextBytes = Encoding.UTF8.GetBytes plaintext
   let ciphertext = Array.zeroCreate<byte> plaintextBytes.Length
@@ -38,7 +41,7 @@ let decrypt (key: string) (encrypted: string) =
   let ciphertext = data.[44..]
 
   let key =
-    Rfc2898DeriveBytes.Pbkdf2(key, salt, 100_000, HashAlgorithmName.SHA256, 32)
+    Rfc2898DeriveBytes.Pbkdf2(key, salt, KeyDeriveIterations, HashAlgorithmName.SHA256, 32)
 
   let plaintext = Array.zeroCreate<byte> ciphertext.Length
 
