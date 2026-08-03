@@ -4,9 +4,9 @@
     "net8.0": {
       "FSharp.Core": {
         "type": "Direct",
-        "requested": "[10.1.302, )",
-        "resolved": "10.1.302",
-        "contentHash": "bN7XMQrAQg1dyHScJ7FcsznERBkvm74LtIo1O6C5mUzgbDqSwNbDpb3+nBGaJAjDmtC/suK5Vx5pFysKY6Hm+Q=="
+        "requested": "[10.0.103, )",
+        "resolved": "10.0.103",
+        "contentHash": "GfQInb74eDh9JZ8wx4+t/lOrH1uRqZvneuViVJ8CwbQwmtyyZoeGuzRayL01MNAsm8B6eRenWwJThu01EFPeKg=="
       },
       "Microsoft.Extensions.Configuration.Abstractions": {
         "type": "Direct",
@@ -48,11 +48,11 @@
       },
       "otsom.fs.Extensions": {
         "type": "Direct",
-        "requested": "[0.1.5, )",
-        "resolved": "0.1.5",
-        "contentHash": "R6kwGfu5RuHw5BcHEP2c+T2z0FU+8OrAWZGimK2CFfSaRNw5FiaAEwQIa9gcTUdyYsjF/AMVc4JLpsLDPMNduA==",
+        "requested": "[0.1.6, )",
+        "resolved": "0.1.6",
+        "contentHash": "K2+4ipdLXIyKvoPErTmcQa779ka92cy4lTPhelP4SseVlPkU0IT83SjZtRdxDqIPi6OX3fDa9BjdHmHq7MNqDA==",
         "dependencies": {
-          "FSharp.Core": "10.1.301",
+          "FSharp.Core": "10.1.302",
           "FsToolkit.ErrorHandling": "5.2.0"
         }
       },
