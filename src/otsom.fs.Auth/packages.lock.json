@@ -48,11 +48,11 @@
       },
       "otsom.fs.Extensions": {
         "type": "Direct",
-        "requested": "[0.1.5, )",
-        "resolved": "0.1.5",
-        "contentHash": "R6kwGfu5RuHw5BcHEP2c+T2z0FU+8OrAWZGimK2CFfSaRNw5FiaAEwQIa9gcTUdyYsjF/AMVc4JLpsLDPMNduA==",
+        "requested": "[0.1.6, )",
+        "resolved": "0.1.6",
+        "contentHash": "K2+4ipdLXIyKvoPErTmcQa779ka92cy4lTPhelP4SseVlPkU0IT83SjZtRdxDqIPi6OX3fDa9BjdHmHq7MNqDA==",
         "dependencies": {
-          "FSharp.Core": "10.1.301",
+          "FSharp.Core": "10.1.302",
           "FsToolkit.ErrorHandling": "5.2.0"
         }
       },
