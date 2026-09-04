@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.11.1"/>
-    <PackageReference Include="otsom.fs.Resources" Version="0.1.9" />
+    <PackageReference Include="otsom.fs.Resources" Version="0.1.10" />
   </ItemGroup>
 
 </Project>

@@ -44,18 +44,18 @@
       },
       "otsom.fs.Bot": {
         "type": "Direct",
-        "requested": "[0.1.8, )",
-        "resolved": "0.1.8",
-        "contentHash": "OpXvmP6Yu4p2+0YMRJRTyitJMfaLSNaPlIB78s69gcabGs4znpTPFaPMn9GhDB6FS2UTb/63K0Bsn1NdlFs6qw==",
+        "requested": "[0.1.9, )",
+        "resolved": "0.1.9",
+        "contentHash": "59DWcvU9PABv5vROr2tR45CCRslhO0LSEaWD4P0Cgi0GAClwqlkMRmcafGxXBJ9QsD1Ezh2gILnYraCYWo1mnw==",
         "dependencies": {
-          "FSharp.Core": "10.1.302"
+          "FSharp.Core": "10.1.400"
         }
       },
       "otsom.fs.Extensions": {
         "type": "Direct",
-        "requested": "[0.1.7, )",
-        "resolved": "0.1.7",
-        "contentHash": "URwpCwCX+uR3qR1dE8V5mbFqtLyeRfh2MyI/gxw6OgkFsLAxzaeTeSdwTXHnJa3D2B2bUkP7RFvJsm3SKY4BeQ==",
+        "requested": "[0.1.8, )",
+        "resolved": "0.1.8",
+        "contentHash": "RgOcQqFZJ3wwLkdQ7i9yxIvofBgmz511seZRQykG32FpHVOROifd0A8q6vnkqg9FTqAzq7P1tqwmMGj7UCY0qQ==",
         "dependencies": {
           "FSharp.Core": "10.1.400",
           "FsToolkit.ErrorHandling": "5.2.0"

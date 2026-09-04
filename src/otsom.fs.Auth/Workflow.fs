@@ -56,6 +56,6 @@ type AuthService(authRepo: IAuthRepo) =
             Error(StateDoesntBelongToUser)
 
       authRepo.LoadFulfilledAuth state
-      |> Task.map (Result.ofOption CompleteError.StateNotFound)
+      |> Task.map (Result.requireSome CompleteError.StateNotFound)
       |> Task.map (Result.bind (validateAuth accountId))
       |> Task.bind (Result.taskMap createCompletedAuth)
