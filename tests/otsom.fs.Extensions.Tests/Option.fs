@@ -3,7 +3,6 @@
 open System
 open Xunit
 open otsom.fs.Extensions
-open FsUnit.Xunit
 open System.Threading.Tasks
 
 [<Fact>]
@@ -18,7 +17,7 @@ let ``defaultWithTask return value if Option is Some`` () = task {
 
   // Assert
 
-  result |> should equal 42
+  Assert.Equal(42, result)
 }
 
 [<Fact>]
@@ -33,29 +32,29 @@ let ``defaultWithTask executes defThunkTask if option is None`` () = task {
 
   // Assert
 
-  result |> should equal 42
+  Assert.Equal(42, result)
 }
 
 [<Fact>]
 let ``someIf returns Some if predicate is true`` () =
   let result = 42 |> Option.someIf ((=) 42)
 
-  result |> should equal (Some 42)
+  Assert.Equal(Some 42, result)
 
 [<Fact>]
 let ``someIf returns None if predicate is false`` () =
   let result = 42 |> Option.someIf ((=) 42 >> not)
 
-  result |> should equal None
+  Assert.Equal(None, result)
 
 [<Fact>]
 let ``noneIf returns None if predicate is true`` () =
   let result = 42 |> Option.noneIf ((=) 42)
 
-  result |> should equal None
+  Assert.Equal(None, result)
 
 [<Fact>]
 let ``noneIf returns None if predicate is false`` () =
   let result = 42 |> Option.noneIf ((=) 42 >> not)
 
-  result |> should equal (Some 42)
+  Assert.Equal(Some 42, result)

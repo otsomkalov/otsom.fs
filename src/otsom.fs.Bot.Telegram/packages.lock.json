@@ -53,22 +53,22 @@
       },
       "otsom.fs.Extensions": {
         "type": "Direct",
-        "requested": "[0.1.6, )",
-        "resolved": "0.1.6",
-        "contentHash": "K2+4ipdLXIyKvoPErTmcQa779ka92cy4lTPhelP4SseVlPkU0IT83SjZtRdxDqIPi6OX3fDa9BjdHmHq7MNqDA==",
+        "requested": "[0.1.7, )",
+        "resolved": "0.1.7",
+        "contentHash": "URwpCwCX+uR3qR1dE8V5mbFqtLyeRfh2MyI/gxw6OgkFsLAxzaeTeSdwTXHnJa3D2B2bUkP7RFvJsm3SKY4BeQ==",
         "dependencies": {
-          "FSharp.Core": "10.1.302",
+          "FSharp.Core": "10.1.400",
           "FsToolkit.ErrorHandling": "5.2.0"
         }
       },
       "otsom.fs.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[0.1.6, )",
-        "resolved": "0.1.6",
-        "contentHash": "hwVNWS4zqEWrP6SKrVob4ZWDP56zfJwMAGl6Hdd183OPqfUSRjiAP5M4QrJX+MbjOUxtjyPDMJRKDoil0o4CMg==",
+        "requested": "[0.1.7, )",
+        "resolved": "0.1.7",
+        "contentHash": "WIUBtXH+JJ4WUBzOymZBEJkysE2skHrKQWjIQw83jUZqFruXGlx/TmSk0JjHXDn24GM6vJdWHA49NfMObzYdtQ==",
         "dependencies": {
-          "FSharp.Core": "10.1.302",
-          "Microsoft.Extensions.DependencyInjection": "10.0.10"
+          "FSharp.Core": "10.1.400",
+          "Microsoft.Extensions.DependencyInjection": "10.0.11"
         }
       },
       "Telegram.Bot": {
@@ -109,10 +109,10 @@
       },
       "Microsoft.Extensions.DependencyInjection": {
         "type": "Transitive",
-        "resolved": "10.0.10",
-        "contentHash": "ANyvsgkNBRvcJh2XLgn8veGmajf+8m0AbKK+HPWdRL1yraSNVVSmQhFntLtdz/C795jxqqup+k05cs/3jZQPOA==",
+        "resolved": "10.0.11",
+        "contentHash": "PSmotV19c7E3lKed++uYo1kSiXFI+uTl37CBSrhq+CfLC3FCHjG7R91+xPnNehQfHS1b0Tzo/CCLPWH3qaEheg==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.10"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.11"
         }
       },
       "Microsoft.Extensions.Options": {
