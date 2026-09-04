@@ -2,7 +2,6 @@
 
 open Xunit
 open otsom.fs.Extensions
-open FsUnit.Xunit
 
 [<Fact>]
 let ``takeSafe returns original list if count greater than length`` () =
@@ -10,7 +9,7 @@ let ``takeSafe returns original list if count greater than length`` () =
 
   let result = list |> List.takeSafe 3
 
-  result |> should equal list
+  Assert.Equal<int list>(list, result)
 
 [<Fact>]
 let ``takeSafe returns original list if count equals length`` () =
@@ -18,7 +17,7 @@ let ``takeSafe returns original list if count equals length`` () =
 
   let result = list |> List.takeSafe 2
 
-  result |> should equal list
+  Assert.Equal<int list>(list, result)
 
 [<Fact>]
 let ``takeSafe returns correct list if count lower than length`` () =
@@ -26,7 +25,7 @@ let ``takeSafe returns correct list if count lower than length`` () =
 
   let result = list |> List.takeSafe 1
 
-  result |> should equal [ 1 ]
+  Assert.Equal<int list>([ 1 ], result)
 
 [<Fact>]
 let ``prepend prepends list2 to list1`` () =
@@ -35,4 +34,4 @@ let ``prepend prepends list2 to list1`` () =
 
   let result = List.prepend list1 list2
 
-  result |> should equal [ 3; 4; 1; 2 ]
+  Assert.Equal<int list>([ 3; 4; 1; 2 ], result)

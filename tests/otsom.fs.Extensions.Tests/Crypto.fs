@@ -1,7 +1,6 @@
 ﻿module Crypto
 
 open Xunit
-open FsUnit.Xunit
 open otsom.fs.Extensions.Crypto
 
 [<Fact>]
@@ -12,7 +11,7 @@ let ``Should encrypt and decrypt string`` () =
   let encrypted = encrypt key plainText
   let decrypted = decrypt key encrypted
 
-  decrypted |> should equal plainText
+  Assert.Equal(plainText, decrypted)
 
 [<Fact>]
 let ``Different IVs for same text and key`` () =
@@ -22,7 +21,7 @@ let ``Different IVs for same text and key`` () =
   let encrypted1 = encrypt key plainText
   let encrypted2 = encrypt key plainText
 
-  encrypted1 |> should not' (equal encrypted2)
+  Assert.NotEqual<string>(encrypted1, encrypted2)
 
 [<Fact>]
 let ``Should fail to decrypt with wrong key`` () =
@@ -31,5 +30,5 @@ let ``Should fail to decrypt with wrong key`` () =
   let plainText = "hello world"
   let encrypted = encrypt key1 plainText
 
-  (fun () -> decrypt key2 encrypted |> ignore)
-  |> should throw typeof<System.Security.Cryptography.CryptographicException>
+  Assert.ThrowsAny<System.Security.Cryptography.CryptographicException>(fun () -> decrypt key2 encrypted |> ignore)
+  |> ignore

@@ -49,6 +49,16 @@ jobs:
           projects: 'src/${{ parameters.projectName }}/*.fsproj'
           arguments: '-c Release'
       - task: DotNetCoreCLI@2
+        name: Test
+        inputs:
+          command: 'test'
+          projects: 'tests/${{ parameters.projectName }}.Tests/*.fsproj'
+          arguments: '--coverage --coverage-output-format cobertura'
+      - task: PublishCodeCoverageResults@2
+        displayName: 'Publish coverage'
+        inputs:
+          summaryFileLocation: '$(Agent.TempDirectory)/*.cobertura.xml'
+      - task: DotNetCoreCLI@2
         name: Pack
         inputs:
           command: 'pack'

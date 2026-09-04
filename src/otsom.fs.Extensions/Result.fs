@@ -5,12 +5,6 @@ open System.Threading.Tasks
 open FsToolkit.ErrorHandling
 
 [<StackTraceHidden>]
-let ofOption error option =
-  match option with
-  | Some value -> Ok value
-  | None -> Error error
-
-[<StackTraceHidden>]
 let inline taskMap ([<InlineIfLambda>] mappingTask) result =
   match result with
   | Ok v -> mappingTask v |> Task.map Ok

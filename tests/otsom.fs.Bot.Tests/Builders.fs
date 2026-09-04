@@ -2,7 +2,6 @@ module Tests
 
 open System.Threading.Tasks
 open Xunit
-open FsUnit.Xunit
 open otsom.fs.Bot
 open otsom.fs.Bot.Builders
 
@@ -31,8 +30,8 @@ type ClickHandlersBuilderTests() =
     let! result1 = handler1 chat click
     let! result2 = handler2 chat click
 
-    result1 |> should equal None
-    result2 |> should equal None
+    Assert.Equal(None, result1)
+    Assert.Equal(None, result2)
   }
 
   [<Fact>]
@@ -46,8 +45,8 @@ type ClickHandlersBuilderTests() =
     let! result1 = handler1 chat click
     let! result2 = handler2 chat click
 
-    result1 |> should equal expected
-    result2 |> should equal expected
+    Assert.Equal(expected, result1)
+    Assert.Equal(expected, result2)
   }
 
   [<Fact>]
@@ -62,7 +61,7 @@ type ClickHandlersBuilderTests() =
 
     let! result = combinedHandler chat click
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
   [<Fact>]
@@ -77,7 +76,7 @@ type ClickHandlersBuilderTests() =
 
     let! result = combinedHandler chat click
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
   [<Fact>]
@@ -92,7 +91,7 @@ type ClickHandlersBuilderTests() =
 
     let! result = combinedHandler chat click
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
   [<Fact>]
@@ -107,7 +106,7 @@ type ClickHandlersBuilderTests() =
 
     let! result = combinedHandler chat click
 
-    result |> should equal None
+    Assert.Equal(None, result)
   }
 
   [<Fact>]
@@ -124,7 +123,7 @@ type ClickHandlersBuilderTests() =
 
     let! result = combinedHandler chat click
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
 type MessageHandlersBuilderTests() =
@@ -140,8 +139,8 @@ type MessageHandlersBuilderTests() =
     let! result1 = handler1 chat message
     let! result2 = handler2 chat message
 
-    result1 |> should equal None
-    result2 |> should equal None
+    Assert.Equal(None, result1)
+    Assert.Equal(None, result2)
   }
 
   [<Fact>]
@@ -155,8 +154,8 @@ type MessageHandlersBuilderTests() =
     let! result1 = handler1 chat message
     let! result2 = handler2 chat message
 
-    result1 |> should equal expected
-    result2 |> should equal expected
+    Assert.Equal(expected, result1)
+    Assert.Equal(expected, result2)
   }
 
   [<Fact>]
@@ -171,7 +170,7 @@ type MessageHandlersBuilderTests() =
 
     let! result = combinedHandler chat message
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
   [<Fact>]
@@ -186,7 +185,7 @@ type MessageHandlersBuilderTests() =
 
     let! result = combinedHandler chat message
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
   [<Fact>]
@@ -201,7 +200,7 @@ type MessageHandlersBuilderTests() =
 
     let! result = combinedHandler chat message
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }
 
   [<Fact>]
@@ -216,7 +215,7 @@ type MessageHandlersBuilderTests() =
 
     let! result = combinedHandler chat message
 
-    result |> should equal None
+    Assert.Equal(None, result)
   }
 
   [<Fact>]
@@ -233,5 +232,5 @@ type MessageHandlersBuilderTests() =
 
     let! result = combinedHandler chat message
 
-    result |> should equal (Some())
+    Assert.Equal(Some(), result)
   }

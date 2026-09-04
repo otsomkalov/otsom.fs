@@ -2,7 +2,6 @@
 
 open Xunit
 open otsom.fs.Extensions.String
-open FsUnit.Xunit
 
 [<Fact>]
 let ``StartsWith return correct result for strings in different case`` () =
@@ -14,7 +13,7 @@ let ``StartsWith return correct result for strings in different case`` () =
     | StartsWith second -> true
     | _ -> false
 
-  result |> should equal true
+  Assert.True(result)
 
 [<Fact>]
 let ``Equals return correct result for strings in different case`` () =
@@ -26,4 +25,4 @@ let ``Equals return correct result for strings in different case`` () =
     | Equals second -> true
     | _ -> false
 
-  result |> should equal true
+  Assert.True(result)
