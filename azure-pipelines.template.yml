@@ -52,7 +52,7 @@ jobs:
         name: Test
         inputs:
           command: 'test'
-          projects: 'tests/**/*.fsproj'
+          projects: 'tests/${{ parameters.projectName }}.Tests/*.fsproj'
           arguments: '--coverage --coverage-output-format cobertura'
       - task: PublishCodeCoverageResults@2
         displayName: 'Publish coverage'
