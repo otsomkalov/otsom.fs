@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/otsom.fs.OAuth.Keycloak/*
+
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/otsom.fs.OAuth.Keycloak/*
+
+extends:
+  template: ../../azure-pipelines.template.yml
+  parameters:
+    projectName: 'otsom.fs.OAuth.Keycloak'

@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/OAuth/">
     <Project Path="src/otsom.fs.OAuth/otsom.fs.OAuth.fsproj"/>
+    <Project Path="src/otsom.fs.OAuth.Keycloak/otsom.fs.OAuth.Keycloak.fsproj"/>
     <Project Path="src/otsom.fs.OAuth.Spotify/otsom.fs.OAuth.Spotify.fsproj"/>
     <Project Path="src/otsom.fs.OAuth.Telegram/otsom.fs.OAuth.Telegram.fsproj"/>
   </Folder>
