@@ -44,31 +44,31 @@
       },
       "otsom.fs.Bot": {
         "type": "Direct",
-        "requested": "[0.1.9, )",
-        "resolved": "0.1.9",
-        "contentHash": "59DWcvU9PABv5vROr2tR45CCRslhO0LSEaWD4P0Cgi0GAClwqlkMRmcafGxXBJ9QsD1Ezh2gILnYraCYWo1mnw==",
+        "requested": "[0.1.10, )",
+        "resolved": "0.1.10",
+        "contentHash": "4M96eC1Pdm7oTK9MkM8Xs5AtnWmGFp1MGryno1j5cWhCcsYQlCaeTHRAy5J+qtEkNE7hMVxHWg9bP5su/uf4ig==",
         "dependencies": {
-          "FSharp.Core": "10.1.400"
+          "FSharp.Core": "10.1.401"
         }
       },
       "otsom.fs.Extensions": {
         "type": "Direct",
-        "requested": "[0.1.8, )",
-        "resolved": "0.1.8",
-        "contentHash": "RgOcQqFZJ3wwLkdQ7i9yxIvofBgmz511seZRQykG32FpHVOROifd0A8q6vnkqg9FTqAzq7P1tqwmMGj7UCY0qQ==",
+        "requested": "[0.1.9, )",
+        "resolved": "0.1.9",
+        "contentHash": "xyVZL6hYZMCnrrqrmkohia28a3FgIbqV2NzOaYC+s3jKKwaJcvXJzstWFhHdH9iUhoWGd0Oqa7/UA4V3/A4ZbA==",
         "dependencies": {
-          "FSharp.Core": "10.1.400",
+          "FSharp.Core": "10.1.401",
           "FsToolkit.ErrorHandling": "5.2.0"
         }
       },
       "otsom.fs.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[0.1.7, )",
-        "resolved": "0.1.7",
-        "contentHash": "WIUBtXH+JJ4WUBzOymZBEJkysE2skHrKQWjIQw83jUZqFruXGlx/TmSk0JjHXDn24GM6vJdWHA49NfMObzYdtQ==",
+        "requested": "[0.1.8, )",
+        "resolved": "0.1.8",
+        "contentHash": "LrsLB2tclPdLUi4w/MIPRwPqxChZIqy5L6NRzSp/IT6vL9VTZwXVOiVyuInQfcsNt/L93R9cGD1MffUzlkxHvw==",
         "dependencies": {
-          "FSharp.Core": "10.1.400",
-          "Microsoft.Extensions.DependencyInjection": "10.0.11"
+          "FSharp.Core": "10.1.401",
+          "Microsoft.Extensions.DependencyInjection": "10.0.12"
         }
       },
       "Telegram.Bot": {
@@ -109,10 +109,10 @@
       },
       "Microsoft.Extensions.DependencyInjection": {
         "type": "Transitive",
-        "resolved": "10.0.11",
-        "contentHash": "PSmotV19c7E3lKed++uYo1kSiXFI+uTl37CBSrhq+CfLC3FCHjG7R91+xPnNehQfHS1b0Tzo/CCLPWH3qaEheg==",
+        "resolved": "10.0.12",
+        "contentHash": "lXyK2O5GoYvfxW8eCFcD16JFbcoSTM1sJkAM0UHS1jZyl9NYMW64Tqm6OQFT0IDBjZi+xHt95/Zg+nxZhGFhZg==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.11"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.12"
         }
       },
       "Microsoft.Extensions.Options": {
