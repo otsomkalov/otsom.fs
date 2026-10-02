@@ -3,6 +3,7 @@
     <Project Path="src/otsom.fs.Auth.Spotify/otsom.fs.Auth.Spotify.fsproj"/>
     <Project Path="src/otsom.fs.Auth/otsom.fs.Auth.fsproj"/>
     <Project Path="src/otsom.fs.OAuth/otsom.fs.OAuth.fsproj"/>
+    <Project Path="src/otsom.fs.OAuth.Telegram/otsom.fs.OAuth.Telegram.fsproj"/>
   </Folder>
   <Folder Name="/Bot/">
     <Project Path="src/otsom.fs.Bot.Telegram/otsom.fs.Bot.Telegram.fsproj"/>
