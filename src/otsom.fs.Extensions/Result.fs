@@ -20,11 +20,10 @@ let inline taskBind ([<InlineIfLambda>] binder) result =
 let inline taskTap
   ([<InlineIfLambda>] action: 'okInput -> Task<unit>)
   (input: Result<'okInput, 'errorInput>)
-  : Task<Result<'okInput, 'errorInput>> =
-  task {
-    match input with
-    | Ok x ->
-      do! action x
-      return Ok x
-    | Error err -> return Error err
-  }
+  : Task<Result<'okInput, 'errorInput>> = task {
+  match input with
+  | Ok x ->
+    do! action x
+    return Ok x
+  | Error err -> return Error err
+}

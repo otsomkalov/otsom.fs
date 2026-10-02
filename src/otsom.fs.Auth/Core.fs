@@ -36,13 +36,17 @@ type RefreshToken =
   member this.Value = let (RefreshToken token) = this in token
 
 type Fulfilled =
-  { AccountId: AccountId
+  {
+    AccountId: AccountId
     State: State
-    Code: Code }
+    Code: Code
+  }
 
 type Completed =
-  { AccountId: AccountId
-    Token: RefreshToken }
+  {
+    AccountId: AccountId
+    Token: RefreshToken
+  }
 
 type IInitAuth =
   abstract InitAuth: accountId: AccountId -> Task<Uri>

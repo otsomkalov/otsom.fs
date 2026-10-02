@@ -14,10 +14,6 @@ let inline taskMap ([<InlineIfLambda>] mapping) taskResult =
   taskResult |> Task.bind (Result.taskMap mapping)
 
 [<StackTraceHidden>]
-let inline either ([<InlineIfLambda>] onOk) ([<InlineIfLambda>] onError) taskResult =
-  taskResult |> Task.map (Result.either onOk onError)
-
-[<StackTraceHidden>]
 let inline taskEither ([<InlineIfLambda>] onOk: 'okInput -> Task<'output>) ([<InlineIfLambda>] onError: 'errorInput -> Task<'output>) =
   Task.bind (Result.either onOk onError)
 

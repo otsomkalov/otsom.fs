@@ -2,7 +2,9 @@
 
 [<CLIMutable>]
 type StorageSettings =
-  { ConnectionString: string
-    Container: string }
+  {
+    ConnectionString: string
+    Container: string
+  }
 
   static member SectionName = "Storage"

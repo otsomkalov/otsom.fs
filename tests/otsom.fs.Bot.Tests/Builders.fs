@@ -18,9 +18,11 @@ type ClickHandlersBuilderTests() =
   let chat = MockChat() :> IChat
 
   let click =
-    { Id = ButtonClickId "1"
+    {
+      Id = ButtonClickId "1"
       MessageId = BotMessageId 1
-      Data = [] }
+      Data = []
+    }
 
   [<Fact>]
   member _.``Return and Zero return None``() = task {
