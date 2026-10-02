@@ -31,15 +31,15 @@
       },
       "otsom.fs.Auth": {
         "type": "Direct",
-        "requested": "[0.1.12, )",
-        "resolved": "0.1.12",
-        "contentHash": "I8ioyP7VUcPq9ku8ArZerKeLn+gLuy2UnITGNpCPLXs6VJH3u/fvDYUJnxh+eJBL+5eWAhjkLZMthdGcMLkkOw==",
+        "requested": "[0.1.13, )",
+        "resolved": "0.1.13",
+        "contentHash": "5mjwjzbNAhxanlbwv9Lnt4PkY0q6TR61+hqls7xaGtWDsD+NHswu4dIpBZTtGTzx1yT9W+3TwbyhGLJw9UNpxQ==",
         "dependencies": {
           "FSharp.Core": "10.1.401",
           "Microsoft.Extensions.Configuration.Abstractions": "10.0.12",
           "Microsoft.Extensions.Options": "10.0.12",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "10.0.12",
-          "otsom.fs.Extensions": "0.1.8",
+          "otsom.fs.Extensions": "0.1.9",
           "shortid": "5.1.1"
         }
       },
@@ -160,10 +160,10 @@
       },
       "otsom.fs.Extensions": {
         "type": "Transitive",
-        "resolved": "0.1.8",
-        "contentHash": "RgOcQqFZJ3wwLkdQ7i9yxIvofBgmz511seZRQykG32FpHVOROifd0A8q6vnkqg9FTqAzq7P1tqwmMGj7UCY0qQ==",
+        "resolved": "0.1.9",
+        "contentHash": "xyVZL6hYZMCnrrqrmkohia28a3FgIbqV2NzOaYC+s3jKKwaJcvXJzstWFhHdH9iUhoWGd0Oqa7/UA4V3/A4ZbA==",
         "dependencies": {
-          "FSharp.Core": "10.1.400",
+          "FSharp.Core": "10.1.401",
           "FsToolkit.ErrorHandling": "5.2.0"
         }
       },
