@@ -8,6 +8,7 @@
     <Project Path="src/otsom.fs.OAuth.Keycloak/otsom.fs.OAuth.Keycloak.fsproj"/>
     <Project Path="src/otsom.fs.OAuth.Spotify/otsom.fs.OAuth.Spotify.fsproj"/>
     <Project Path="src/otsom.fs.OAuth.Telegram/otsom.fs.OAuth.Telegram.fsproj"/>
+    <Project Path="src/otsom.fs.OAuth.Storage.Mongo/otsom.fs.OAuth.Storage.Mongo.fsproj"/>
   </Folder>
   <Folder Name="/Bot/">
     <Project Path="src/otsom.fs.Bot.Telegram/otsom.fs.Bot.Telegram.fsproj"/>
