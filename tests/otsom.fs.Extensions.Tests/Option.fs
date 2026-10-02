@@ -13,7 +13,8 @@ let ``defaultWithTask return value if Option is Some`` () = task {
 
   // Act
 
-  let! result = value |> Option.defaultWithTask (fun _ -> raise (NotImplementedException()))
+  let! result =
+    value |> Option.defaultWithTask (fun _ -> raise (NotImplementedException()))
 
   // Assert
 

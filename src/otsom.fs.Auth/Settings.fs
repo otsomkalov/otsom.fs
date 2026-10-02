@@ -4,9 +4,11 @@ open System
 
 [<CLIMutable>]
 type AuthSettings =
-  { ClientId: string
+  {
+    ClientId: string
     ClientSecret: string
     CallbackUrl: Uri
-    Scopes: string array }
+    Scopes: string array
+  }
 
   static member SectionName = "Auth"

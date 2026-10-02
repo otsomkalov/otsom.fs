@@ -9,8 +9,10 @@ type AuthService(authRepo: IAuthRepo) =
   interface IAuthService with
     member this.InitAuth(accountId) = task {
       let initedAuth: Inited =
-        { AccountId = accountId
-          State = State.Create() }
+        {
+          AccountId = accountId
+          State = State.Create()
+        }
 
       do! authRepo.SaveInitedAuth initedAuth
 
@@ -23,9 +25,11 @@ type AuthService(authRepo: IAuthRepo) =
           match initedAuth with
           | Some auth -> task {
               let fulfilledAuth: Fulfilled =
-                { State = auth.State
+                {
+                  State = auth.State
                   AccountId = auth.AccountId
-                  Code = code }
+                  Code = code
+                }
 
               do! authRepo.SaveFulfilledAuth fulfilledAuth
 
@@ -42,8 +46,10 @@ type AuthService(authRepo: IAuthRepo) =
         let! refreshToken = authRepo.GetRefreshToken auth.Code
 
         let completed =
-          { AccountId = auth.AccountId
-            Token = refreshToken }
+          {
+            AccountId = auth.AccountId
+            Token = refreshToken
+          }
 
         do! authRepo.SaveCompletedAuth completed
       }

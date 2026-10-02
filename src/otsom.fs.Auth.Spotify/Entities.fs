@@ -20,13 +20,17 @@ type Auth() =
   member val CreatedAt: DateTime = DateTime.UtcNow with get
 
   member this.ToInited() : Inited =
-    { State = State.Parse this.State
-      AccountId = AccountId this.AccountId }
+    {
+      State = State.Parse this.State
+      AccountId = AccountId this.AccountId
+    }
 
   member this.ToFulfilled() : Fulfilled =
-    { State = State.Parse this.State
+    {
+      State = State.Parse this.State
       AccountId = AccountId this.AccountId
-      Code = Code this.Code }
+      Code = Code this.Code
+    }
 
   static member FromInited(auth: Inited) =
     Auth(AccountId = auth.AccountId.Value, State = auth.State.Value)
@@ -46,8 +50,10 @@ type UserToken() =
   member val CreatedAt: DateTime = DateTime.UtcNow with get
 
   member this.ToCompletedAuth() : Completed =
-    { AccountId = AccountId this.AccountId
-      Token = RefreshToken this.RefreshToken }
+    {
+      AccountId = AccountId this.AccountId
+      Token = RefreshToken this.RefreshToken
+    }
 
   static member FromCompleted(auth: Completed) =
     UserToken(AccountId = auth.AccountId.Value, RefreshToken = auth.Token.Value)

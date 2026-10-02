@@ -3,9 +3,11 @@
 open System.Threading.Tasks
 
 type Resource =
-  { Key: string
+  {
+    Key: string
     Value: string
-    Lang: string }
+    Lang: string
+  }
 
 type IResourceRepo =
   abstract LoadResources: string -> Task<Resource seq>

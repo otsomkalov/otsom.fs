@@ -2,6 +2,8 @@
 
 [<CLIMutable>]
 type ResourcesSettings =
-  { DefaultLang: string }
+  {
+    DefaultLang: string
+  }
 
   static member SectionName = "Resources"

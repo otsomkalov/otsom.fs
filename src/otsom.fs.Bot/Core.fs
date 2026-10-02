@@ -65,9 +65,11 @@ type ButtonClickId =
   member this.Value = let (ButtonClickId id) = this in id
 
 type Click =
-  { Id: ButtonClickId
+  {
+    Id: ButtonClickId
     MessageId: BotMessageId
-    Data: string list }
+    Data: string list
+  }
 
 type IChat =
   abstract Id: ChatId
