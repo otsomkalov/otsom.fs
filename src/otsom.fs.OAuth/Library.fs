@@ -31,15 +31,26 @@ type AccountId =
 
   member this.Value = let (AccountId value) = this in value
 
-type CompleteError =
-  | RequestNotFound
-  | StateMismatch
+type CompleteError = | RequestNotFound
+
+type StateHash =
+  | StateHash of string
+
+  member this.Value = let (StateHash value) = this in value
 
 type State =
   | State of string
 
   member this.Value = let (State state) = this in state
-  static member Create() = State(Helpers.generateRandomString 16)
+
+  member this.Hash =
+    this.Value
+    |> Encoding.UTF8.GetBytes
+    |> SHA256.HashData
+    |> WebEncoders.Base64UrlEncode
+    |> StateHash
+
+  static member Create() = State(Helpers.generateRandomString 32)
 
 type PKCEVerifier =
   | PKCEVerifier of string
@@ -56,11 +67,17 @@ type PKCEChallenge =
     |> SHA256.HashData
     |> WebEncoders.Base64UrlEncode
 
+type OAuthProvider =
+  | OAuthProvider of string
+
+  member this.Value = let (OAuthProvider provider) = this in provider
+
 type Inited =
   {
     AccountId: AccountId
-    State: State
+    StateHash: StateHash
     Verifier: PKCEVerifier
+    Provider: OAuthProvider
   }
 
 type Code =
@@ -83,16 +100,17 @@ type Completed =
     AccountId: AccountId
     AccessToken: AccessToken
     RefreshToken: RefreshToken
+    Provider: OAuthProvider
   }
 
 type IInitAuth =
   abstract InitAuth: accountId: AccountId -> Task<string>
 
 type ICompleteAuth =
-  abstract CompleteAuth: accountId: AccountId * state: State * code: Code -> TaskResult<Completed, CompleteError>
+  abstract CompleteAuth: state: State * code: Code -> TaskResult<Completed, CompleteError>
 
 type IGetAuth =
-  abstract GetCompleted: AccountId -> Task<Completed option>
+  abstract GetCompleted: accountId: AccountId -> Task<Completed option>
 
 type IOAuthClient =
   inherit IInitAuth
@@ -101,10 +119,14 @@ type IOAuthClient =
 
 type IOAuthRepo =
   abstract SaveInited: Inited -> Task<unit>
-  abstract LoadInited: AccountId -> Task<Inited option>
+
+  /// <summary>
+  /// Retrieves and removes the stored authentication request data
+  /// </summary>
+  abstract PopInited: StateHash -> Task<Inited option>
 
   abstract SaveCompleted: Completed -> Task<unit>
-  abstract LoadCompleted: AccountId -> Task<Completed option>
+  abstract LoadCompleted: AccountId * OAuthProvider -> Task<Completed option>
 
 [<CLIMutable>]
 type TokenResponse =
@@ -139,14 +161,18 @@ type OpenIdConfiguration =
 type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: HttpClient) =
   abstract GetAuthorizationEndpoint: unit -> Task<string>
   abstract PrepareCodeExchangeRequest: HttpContent -> Task<HttpRequestMessage>
+  abstract Provider: OAuthProvider
 
   interface IOAuthClient with
     member this.InitAuth(accountId) = task {
+      let state = State.Create()
+
       let initedAuth: Inited =
         {
           AccountId = accountId
-          State = State.Create()
+          StateHash = state.Hash
           Verifier = PKCEVerifier.Create()
+          Provider = this.Provider
         }
 
       let queryParams =
@@ -154,7 +180,7 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
           KeyValuePair("client_id", settings.ClientId)
           KeyValuePair("scope", settings.Scope |> String.concat " ")
           KeyValuePair("redirect_uri", settings.RedirectUri)
-          KeyValuePair("state", initedAuth.State.Value)
+          KeyValuePair("state", state.Value)
           KeyValuePair("code_challenge", PKCEChallenge.Create(initedAuth.Verifier))
           KeyValuePair("response_type", "code")
           KeyValuePair("code_challenge_method", "S256")
@@ -169,12 +195,10 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
       return redirectUri
     }
 
-    member this.CompleteAuth(accountId, state, code) = taskResult {
+    member this.CompleteAuth(state, code) = taskResult {
       let! authRequest =
-        repo.LoadInited accountId
+        repo.PopInited(state.Hash)
         |> TaskResult.requireSome CompleteError.RequestNotFound
-
-      do! Result.requireEqual authRequest.State state CompleteError.StateMismatch
 
       let formData =
         [
@@ -197,9 +221,10 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
 
       let completedAuth: Completed =
         {
-          AccountId = accountId
+          AccountId = authRequest.AccountId
           AccessToken = AccessToken responseContent.AccessToken
           RefreshToken = RefreshToken responseContent.RefreshToken
+          Provider = authRequest.Provider
         }
 
       do! repo.SaveCompleted completedAuth
@@ -207,7 +232,8 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
       return completedAuth
     }
 
-    member this.GetCompleted(accountId) = repo.LoadCompleted accountId
+    member this.GetCompleted(accountId) =
+      repo.LoadCompleted(accountId, this.Provider)
 
 type IOAuthBuilder =
   abstract Services: IServiceCollection
@@ -219,6 +245,6 @@ type internal OAuthBuilder(services: IServiceCollection) =
 type ServiceCollectionExtensions =
   [<Extension>]
   static member AddOAuth(services: IServiceCollection) =
-    services.AddHttpClient() |> ignore
+    services.AddHttpClient<OAuthClientBase>() |> ignore
 
     OAuthBuilder(services) :> IOAuthBuilder
