@@ -35,6 +35,8 @@ type internal KeycloakOAuthClient(repo: IOAuthRepo, options: IOptions<KeycloakOA
     return new HttpRequestMessage(HttpMethod.Post, oidcConfiguration.TokenEndpoint, Content = content)
   }
 
+  override this.Provider = OAuthProvider "Keycloak"
+
 type OAuthBuilderExtensions =
   [<Extension>]
   static member AddKeycloak(builder: IOAuthBuilder, configuration: IConfiguration) =
