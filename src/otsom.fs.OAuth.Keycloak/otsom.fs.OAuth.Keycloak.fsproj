@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="otsom.fs.OAuth" Version="0.1.1"/>
+    <PackageReference Include="otsom.fs.OAuth" Version="0.2.1"/>
   </ItemGroup>
 
 </Project>

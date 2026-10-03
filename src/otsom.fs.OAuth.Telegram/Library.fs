@@ -50,6 +50,8 @@ type internal TelegramOAuthClient(httpClient: HttpClient, options: IOptions<Tele
     return request
   }
 
+  override this.Provider = OAuthProvider "Telegram"
+
 type OAuthBuilderExtensions =
   [<Extension>]
   static member AddTelegram(builder: IOAuthBuilder, configuration: IConfiguration) =
