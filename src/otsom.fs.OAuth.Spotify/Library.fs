@@ -1,4 +1,4 @@
-﻿namespace otsom.fs.Auth.Spotify
+﻿namespace otsom.fs.OAuth.Spotify
 
 open System.Net.Http
 open System.Runtime.CompilerServices
