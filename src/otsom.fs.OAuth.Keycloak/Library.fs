@@ -29,7 +29,7 @@ type internal KeycloakOAuthClient(repo: IOAuthRepo, options: IOptions<KeycloakOA
     return oidcConfiguration.AuthorizationEndpoint
   }
 
-  override this.PrepareCodeExchangeRequest(content) = task {
+  override this.PrepareTokenRequest(content) = task {
     let! oidcConfiguration = oidcConfigurationTask
 
     return new HttpRequestMessage(HttpMethod.Post, oidcConfiguration.TokenEndpoint, Content = content)

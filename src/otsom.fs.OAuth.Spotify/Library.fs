@@ -24,7 +24,7 @@ type internal SpotifyOAuthClient(repo: IOAuthRepo, options: IOptions<SpotifyOAut
   override this.GetAuthorizationEndpoint() =
     Task.singleton settings.AuthorizationEndpoint
 
-  override this.PrepareCodeExchangeRequest(content) =
+  override this.PrepareTokenRequest(content) =
     Task.singleton (new HttpRequestMessage(HttpMethod.Post, settings.TokenEndpoint, Content = content))
 
   override this.Provider = OAuthProvider "Spotify"
