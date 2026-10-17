@@ -1,5 +1,6 @@
 ﻿namespace otsom.fs.OAuth
 
+open System
 open System.Collections.Generic
 open System.Net.Http
 open System.Net.Http.Json
@@ -85,10 +86,7 @@ type Code =
 
   member this.Value = let (Code code) = this in code
 
-type AccessToken =
-  | AccessToken of string
-
-  member this.Value = let (AccessToken token) = this in token
+type AccessToken = { ExpiresAt: DateTime; Value: string }
 
 type RefreshToken =
   | RefreshToken of string
@@ -99,7 +97,7 @@ type Completed =
   {
     AccountId: AccountId
     AccessToken: AccessToken
-    RefreshToken: RefreshToken
+    RefreshToken: RefreshToken option
     Provider: OAuthProvider
   }
 
@@ -109,13 +107,13 @@ type IInitAuth =
 type ICompleteAuth =
   abstract CompleteAuth: state: State * code: Code -> TaskResult<Completed, CompleteError>
 
-type IGetAuth =
+type IGetCompletedAuth =
   abstract GetCompleted: accountId: AccountId -> Task<Completed option>
 
 type IOAuthClient =
   inherit IInitAuth
   inherit ICompleteAuth
-  inherit IGetAuth
+  inherit IGetCompletedAuth
 
 type IOAuthRepo =
   abstract SaveInited: Inited -> Task<unit>
@@ -160,8 +158,36 @@ type OpenIdConfiguration =
 [<AbstractClass>]
 type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: HttpClient) =
   abstract GetAuthorizationEndpoint: unit -> Task<string>
-  abstract PrepareCodeExchangeRequest: HttpContent -> Task<HttpRequestMessage>
+  abstract PrepareTokenRequest: HttpContent -> Task<HttpRequestMessage>
   abstract Provider: OAuthProvider
+
+  member private this.SendTokenRequest(accountId, provider, formData) = task {
+    use content = new FormUrlEncodedContent(formData)
+
+    use! request = this.PrepareTokenRequest content
+
+    use! response = httpClient.SendAsync(request)
+
+    response.EnsureSuccessStatusCode() |> ignore
+
+    let! responseContent = response.Content.ReadFromJsonAsync<TokenResponse>()
+
+    let completedAuth: Completed =
+      {
+        AccountId = accountId
+        AccessToken =
+          {
+            ExpiresAt = DateTime.UtcNow.AddSeconds responseContent.ExpiresIn
+            Value = responseContent.AccessToken
+          }
+        RefreshToken = responseContent.RefreshToken |> Option.ofObj |> Option.map RefreshToken
+        Provider = provider
+      }
+
+    do! repo.SaveCompleted completedAuth
+
+    return completedAuth
+  }
 
   interface IOAuthClient with
     member this.InitAuth(accountId) = task {
@@ -209,31 +235,27 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
           KeyValuePair("code_verifier", authRequest.Verifier.Value)
         ]
 
-      use content = new FormUrlEncodedContent(formData)
-
-      use! request = this.PrepareCodeExchangeRequest content
-
-      use! response = httpClient.SendAsync(request)
-
-      response.EnsureSuccessStatusCode() |> ignore
-
-      let! responseContent = response.Content.ReadFromJsonAsync<TokenResponse>()
-
-      let completedAuth: Completed =
-        {
-          AccountId = authRequest.AccountId
-          AccessToken = AccessToken responseContent.AccessToken
-          RefreshToken = RefreshToken responseContent.RefreshToken
-          Provider = authRequest.Provider
-        }
-
-      do! repo.SaveCompleted completedAuth
-
-      return completedAuth
+      return! this.SendTokenRequest(authRequest.AccountId, this.Provider, formData)
     }
 
-    member this.GetCompleted(accountId) =
-      repo.LoadCompleted(accountId, this.Provider)
+    member this.GetCompleted(accountId) = taskOption {
+      let! existingAuth = repo.LoadCompleted(accountId, this.Provider)
+
+      match existingAuth with
+      | { AccessToken = accessToken } when accessToken.ExpiresAt > DateTime.UtcNow -> return existingAuth
+      | { RefreshToken = None } -> return! None
+      | {
+          RefreshToken = Some(RefreshToken refreshToken)
+        } ->
+        let formData =
+          [
+            KeyValuePair("grant_type", "refresh_token")
+            KeyValuePair("client_id", settings.ClientId)
+            KeyValuePair("refresh_token", refreshToken)
+          ]
+
+        return! this.SendTokenRequest(existingAuth.AccountId, this.Provider, formData)
+    }
 
 type IOAuthBuilder =
   abstract Services: IServiceCollection
