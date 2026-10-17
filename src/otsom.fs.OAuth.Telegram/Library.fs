@@ -34,7 +34,7 @@ type internal TelegramOAuthClient(httpClient: HttpClient, options: IOptions<Tele
     return oidcConfiguration.AuthorizationEndpoint
   }
 
-  override this.PrepareCodeExchangeRequest(content) = task {
+  override this.PrepareTokenRequest(content) = task {
     let! oidcConfiguration = oidcConfigurationTask
 
     let request =

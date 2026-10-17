@@ -16,9 +16,9 @@
       },
       "otsom.fs.OAuth": {
         "type": "Direct",
-        "requested": "[0.2.1, )",
-        "resolved": "0.2.1",
-        "contentHash": "m7TntneP9FUr2S9SBt4HGr8DT3TgtAt81DbsKQdkCy2EMD4u5K0tdu4NB21w2sO96fTci8/rqOWvzCB5lWTW5Q==",
+        "requested": "[0.3.1, )",
+        "resolved": "0.3.1",
+        "contentHash": "/DSfq0GLFyvHhUzr6axUGJRPQfMePIB2s1M3YhlR1rImF99jDjUxXd8ZPZJw2/8Rrr1rI4t67Wh5dak6+Qzf+w==",
         "dependencies": {
           "FSharp.Core": "10.1.401",
           "Microsoft.AspNetCore.WebUtilities": "8.0.31",

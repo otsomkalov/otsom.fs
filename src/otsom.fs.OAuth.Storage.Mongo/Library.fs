@@ -37,15 +37,23 @@ type internal Auth() =
     Auth(AccountId = auth.AccountId.Value, StateHash = auth.StateHash.Value, Verifier = auth.Verifier.Value, Provider = auth.Provider.Value)
 
 [<AllowNullLiteral; BsonIgnoreExtraElements>]
+type internal AccessToken() =
+  [<BsonElement>]
+  member val ExpiresAt = DateTime.UtcNow with get, set
+
+  [<BsonElement>]
+  member val Value = Unchecked.defaultof<string> with get, set
+
+[<AllowNullLiteral; BsonIgnoreExtraElements>]
 type internal UserToken() =
   [<BsonElement>]
   member val AccountId = Unchecked.defaultof<string> with get, set
 
   [<BsonElement>]
-  member val AccessToken = Unchecked.defaultof<string> with get, set
+  member val AccessToken = Unchecked.defaultof<AccessToken> with get, set
 
   [<BsonElement>]
-  member val RefreshToken = Unchecked.defaultof<string> with get, set
+  member val RefreshToken = Unchecked.defaultof<string | null> with get, set
 
   [<BsonElement>]
   member val Provider = Unchecked.defaultof<string> with get, set
@@ -56,16 +64,20 @@ type internal UserToken() =
   member this.ToCompletedAuth() : Completed =
     {
       AccountId = AccountId this.AccountId
-      AccessToken = AccessToken this.AccessToken
-      RefreshToken = RefreshToken this.RefreshToken
+      AccessToken =
+        {
+          ExpiresAt = this.AccessToken.ExpiresAt
+          Value = this.AccessToken.Value
+        }
+      RefreshToken = this.RefreshToken |> Option.ofObj |> Option.map RefreshToken
       Provider = OAuthProvider this.Provider
     }
 
   static member FromCompleted(auth: Completed) =
     UserToken(
       AccountId = auth.AccountId.Value,
-      AccessToken = auth.AccessToken.Value,
-      RefreshToken = auth.RefreshToken.Value,
+      AccessToken = AccessToken(ExpiresAt = auth.AccessToken.ExpiresAt, Value = auth.AccessToken.Value),
+      RefreshToken = (auth.RefreshToken |> Option.map _.Value |> Option.toObj),
       Provider = auth.Provider.Value
     )
 
