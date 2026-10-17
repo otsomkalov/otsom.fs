@@ -107,17 +107,13 @@ type IInitAuth =
 type ICompleteAuth =
   abstract CompleteAuth: state: State * code: Code -> TaskResult<Completed, CompleteError>
 
-type IRefreshAuth =
-  abstract RefreshAuth: accountId: AccountId -> Task<Completed option>
-
-type IGetAuth =
+type IGetCompletedAuth =
   abstract GetCompleted: accountId: AccountId -> Task<Completed option>
 
 type IOAuthClient =
   inherit IInitAuth
   inherit ICompleteAuth
-  inherit IGetAuth
-  inherit IRefreshAuth
+  inherit IGetCompletedAuth
 
 type IOAuthRepo =
   abstract SaveInited: Inited -> Task<unit>
@@ -242,10 +238,7 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
       return! this.SendTokenRequest(authRequest.AccountId, this.Provider, formData)
     }
 
-    member this.GetCompleted(accountId) =
-      repo.LoadCompleted(accountId, this.Provider)
-
-    member this.RefreshAuth(accountId) = taskOption {
+    member this.GetCompleted(accountId) = taskOption {
       let! existingAuth = repo.LoadCompleted(accountId, this.Provider)
 
       match existingAuth with
