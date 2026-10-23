@@ -1,5 +1,6 @@
 namespace otsom.fs.Bot
 
+open System.Collections.Generic
 open System.Threading.Tasks
 open Microsoft.FSharp.Core
 open System
@@ -101,3 +102,15 @@ type IBotService =
 type BuildBotService = ChatId -> IBotService
 
 type MessageHandler<'chat, 'msg when 'chat :> IChat and 'msg :> IMessage> = 'chat -> 'msg -> Task<unit option>
+
+type BotContext<'TUpdate>(update: 'TUpdate, client: IBotService) =
+  let features = Dictionary<Type, obj>()
+
+  member this.Update = update
+  member this.Client = client
+  member this.SetFeature<'T>(value: 'T) = features.[typeof<'T>] <- value
+  member this.GetFeature<'T>() = features.[typeof<'T>] :?> 'T
+
+type BotHandler<'TUpdate> = BotContext<'TUpdate> -> Task<unit>
+type BotMiddleware<'TUpdate> = BotHandler<'TUpdate> -> BotContext<'TUpdate> -> Task<unit>
+type BotContextEnricher<'TUpdate> = BotContext<'TUpdate> -> Task<unit>
