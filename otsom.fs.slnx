@@ -1,27 +1,23 @@
 ﻿<Solution>
-  <Folder Name="/Auth/">
-    <Project Path="src/otsom.fs.Auth.Spotify/otsom.fs.Auth.Spotify.fsproj"/>
-    <Project Path="src/otsom.fs.Auth/otsom.fs.Auth.fsproj"/>
-  </Folder>
   <Folder Name="/OAuth/">
-    <Project Path="src/otsom.fs.OAuth/otsom.fs.OAuth.fsproj"/>
-    <Project Path="src/otsom.fs.OAuth.Keycloak/otsom.fs.OAuth.Keycloak.fsproj"/>
-    <Project Path="src/otsom.fs.OAuth.Spotify/otsom.fs.OAuth.Spotify.fsproj"/>
-    <Project Path="src/otsom.fs.OAuth.Telegram/otsom.fs.OAuth.Telegram.fsproj"/>
-    <Project Path="src/otsom.fs.OAuth.Storage.Mongo/otsom.fs.OAuth.Storage.Mongo.fsproj"/>
+    <Project Path="src/otsom.fs.OAuth/otsom.fs.OAuth.fsproj" />
+    <Project Path="src/otsom.fs.OAuth.Keycloak/otsom.fs.OAuth.Keycloak.fsproj" />
+    <Project Path="src/otsom.fs.OAuth.Spotify/otsom.fs.OAuth.Spotify.fsproj" />
+    <Project Path="src/otsom.fs.OAuth.Telegram/otsom.fs.OAuth.Telegram.fsproj" />
+    <Project Path="src/otsom.fs.OAuth.Storage.Mongo/otsom.fs.OAuth.Storage.Mongo.fsproj" />
   </Folder>
   <Folder Name="/Bot/">
-    <Project Path="src/otsom.fs.Bot.Telegram/otsom.fs.Bot.Telegram.fsproj"/>
-    <Project Path="src/otsom.fs.Bot/otsom.fs.Bot.fsproj"/>
-    <Project Path="tests/otsom.fs.Bot.Tests/otsom.fs.Bot.Tests.fsproj"/>
+    <Project Path="src/otsom.fs.Bot.Telegram/otsom.fs.Bot.Telegram.fsproj" />
+    <Project Path="src/otsom.fs.Bot/otsom.fs.Bot.fsproj" />
+    <Project Path="tests/otsom.fs.Bot.Tests/otsom.fs.Bot.Tests.fsproj" />
   </Folder>
   <Folder Name="/Extensions/">
-    <Project Path="src/otsom.fs.Extensions.DependencyInjection/otsom.fs.Extensions.DependencyInjection.fsproj"/>
-    <Project Path="tests/otsom.fs.Extensions.Tests/otsom.fs.Extensions.Tests.fsproj"/>
-    <Project Path="src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj"/>
+    <Project Path="src/otsom.fs.Extensions.DependencyInjection/otsom.fs.Extensions.DependencyInjection.fsproj" />
+    <Project Path="tests/otsom.fs.Extensions.Tests/otsom.fs.Extensions.Tests.fsproj" />
+    <Project Path="src/otsom.fs.Extensions/otsom.fs.Extensions.fsproj" />
   </Folder>
   <Folder Name="/Resources/">
-    <Project Path="src/otsom.fs.Resources.Mongo/otsom.fs.Resources.Mongo.fsproj"/>
-    <Project Path="src/otsom.fs.Resources/otsom.fs.Resources.fsproj"/>
+    <Project Path="src/otsom.fs.Resources.Mongo/otsom.fs.Resources.Mongo.fsproj" />
+    <Project Path="src/otsom.fs.Resources/otsom.fs.Resources.fsproj" />
   </Folder>
 </Solution>
