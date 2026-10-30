@@ -157,11 +157,20 @@ type OpenIdConfiguration =
 
 [<AbstractClass>]
 type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: HttpClient) =
+  let createAccessToken token expiresIn : AccessToken =
+    {
+      ExpiresAt = DateTime.UtcNow.AddSeconds expiresIn
+      Value = token
+    }
+
+  let createRefreshToken refreshToken =
+    refreshToken |> Option.ofObj |> Option.map RefreshToken
+
   abstract GetAuthorizationEndpoint: unit -> Task<string>
   abstract PrepareTokenRequest: HttpContent -> Task<HttpRequestMessage>
   abstract Provider: OAuthProvider
 
-  member private this.SendTokenRequest(accountId, provider, formData) = task {
+  member private this.SendTokenRequest(formData) = task {
     use content = new FormUrlEncodedContent(formData)
 
     use! request = this.PrepareTokenRequest content
@@ -170,23 +179,7 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
 
     response.EnsureSuccessStatusCode() |> ignore
 
-    let! responseContent = response.Content.ReadFromJsonAsync<TokenResponse>()
-
-    let completedAuth: Completed =
-      {
-        AccountId = accountId
-        AccessToken =
-          {
-            ExpiresAt = DateTime.UtcNow.AddSeconds responseContent.ExpiresIn
-            Value = responseContent.AccessToken
-          }
-        RefreshToken = responseContent.RefreshToken |> Option.ofObj |> Option.map RefreshToken
-        Provider = provider
-      }
-
-    do! repo.SaveCompleted completedAuth
-
-    return completedAuth
+    return! response.Content.ReadFromJsonAsync<TokenResponse>()
   }
 
   interface IOAuthClient with
@@ -235,26 +228,46 @@ type OAuthClientBase(repo: IOAuthRepo, settings: OAuthSettingsBase, httpClient: 
           KeyValuePair("code_verifier", authRequest.Verifier.Value)
         ]
 
-      return! this.SendTokenRequest(authRequest.AccountId, this.Provider, formData)
+      let! tokenResponse = this.SendTokenRequest(formData)
+
+      let completedAuth: Completed =
+        {
+          AccountId = authRequest.AccountId
+          AccessToken = createAccessToken tokenResponse.AccessToken tokenResponse.ExpiresIn
+          RefreshToken = createRefreshToken tokenResponse.RefreshToken
+          Provider = this.Provider
+        }
+
+      do! repo.SaveCompleted completedAuth
+
+      return completedAuth
     }
 
     member this.GetCompleted(accountId) = taskOption {
-      let! existingAuth = repo.LoadCompleted(accountId, this.Provider)
-
-      match existingAuth with
-      | { AccessToken = accessToken } when accessToken.ExpiresAt > DateTime.UtcNow -> return existingAuth
+      match! repo.LoadCompleted(accountId, this.Provider) with
+      | { AccessToken = accessToken } as activeAuth when accessToken.ExpiresAt > DateTime.UtcNow -> return activeAuth
       | { RefreshToken = None } -> return! None
-      | {
-          RefreshToken = Some(RefreshToken refreshToken)
-        } ->
+      | { RefreshToken = Some refreshToken } as expiredAuth ->
         let formData =
           [
             KeyValuePair("grant_type", "refresh_token")
             KeyValuePair("client_id", settings.ClientId)
-            KeyValuePair("refresh_token", refreshToken)
+            KeyValuePair("refresh_token", refreshToken.Value)
           ]
 
-        return! this.SendTokenRequest(existingAuth.AccountId, this.Provider, formData)
+        let! refreshTokenResponse = this.SendTokenRequest(formData)
+
+        let refreshedAuth =
+          { expiredAuth with
+              AccessToken = createAccessToken refreshTokenResponse.AccessToken refreshTokenResponse.ExpiresIn
+              RefreshToken =
+                createRefreshToken refreshTokenResponse.RefreshToken
+                |> Option.orElse (Some refreshToken)
+          }
+
+        do! repo.SaveCompleted refreshedAuth
+
+        return refreshedAuth
     }
 
 type IOAuthBuilder =
